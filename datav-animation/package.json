@@ -1,0 +1,53 @@
+{
+  "name": "@sgcc-firstcomponent/datav-animation",
+  "version": "0.0.1",
+  "dependencies": {
+    "bcore": "0.0.18",
+    "jquery": "2.1.4",
+    "lodash": "4.6.1",
+    "echarts": "5.0.0"
+  },
+  "datav": {
+    "cn_name": "动效组件",
+    "icon": "",
+    "protocol": 2,
+    "type": [
+      "m"
+    ],
+    "view": {
+      "width": "900",
+      "height": "600",
+      "minWidth": "200",
+      "minHeight": "100"
+    },
+    "apis": {
+      "source": {
+        "handler": "render",
+        "description": "接口描述",
+        "fields": {
+          "value": {
+            "description": "值说明"
+          }
+        }
+      }
+    },
+    "config": {
+      "size": {
+        "name": "字号",
+        "type": "number",
+        "range": [
+          10,
+          100
+        ],
+        "default": 22
+      }
+    },
+    "api_data": {
+      "source": [
+        {
+          "value": "值"
+        }
+      ]
+    }
+  }
+}
