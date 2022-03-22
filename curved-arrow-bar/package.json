@@ -40,12 +40,22 @@
           10,
           100
         ]
+      },
+      "color":{
+        "name": "字体颜色",
+        "type": "color",
+        "default": "#ffffff"
       }
     },
     "api_data": {
       "source": [
         {
-          "value": "值"
+          "name":"上年同期累计数",
+          "value": "150"
+        },
+        {
+          "name":"本期累计数",
+          "value": "120"
         }
       ]
     }
