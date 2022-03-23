@@ -1,5 +1,5 @@
 {
-  "name": "@sgcc-firstcomponent/curved-arrow-bar",
+  "name": "@sgcc-firstcomponent/rich-label-pie",
   "version": "0.0.1",
   "dependencies": {
     "bcore": "0.0.18",
@@ -8,15 +8,15 @@
     "echarts": "5.0.0"
   },
   "datav": {
-    "cn_name": "箭头柱图",
+    "cn_name": "富文本饼环图",
     "icon": "",
     "protocol": 2,
     "type": [
       "regular"
     ],
     "view": {
-      "width": "600",
-      "height": "400",
+      "width": "800",
+      "height": "600",
       "minWidth": "200",
       "minHeight": "100"
     },
@@ -59,45 +59,49 @@
           "titleSize": 22
         }
       },
-      "arrowPosition": {
-        "name": "箭头位置",
-        "type": "select",
-        "options": [
-          {
-            "value": "top",
-            "label": "柱顶"
-          },
-          {
-            "value": "middle",
-            "label": "柱间"
-          }
-        ],
-        "default": "top"
-      },
       "size": {
         "name": "字号",
         "type": "number",
+        "default": 22,
         "range": [
           10,
           100
-        ],
-        "default": 22
-      },
-      "color": {
-        "name": "字体颜色",
-        "type": "color",
-        "default": "#1890ff"
+        ]
       }
     },
     "api_data": {
       "source": [
         {
-          "name": "上年同期累计数",
-          "value": 1500
+          "value": 1048,
+          "name": "Baidu"
         },
         {
-          "name": "本期累计数",
-          "value": 1200
+          "value": 335,
+          "name": "Direct"
+        },
+        {
+          "value": 310,
+          "name": "Email"
+        },
+        {
+          "value": 251,
+          "name": "Google"
+        },
+        {
+          "value": 234,
+          "name": "Union Ads"
+        },
+        {
+          "value": 147,
+          "name": "Bing"
+        },
+        {
+          "value": 135,
+          "name": "Video Ads"
+        },
+        {
+          "value": 102,
+          "name": "Others"
         }
       ]
     }

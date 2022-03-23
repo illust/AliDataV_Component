@@ -49,17 +49,110 @@ module.exports = Event.extend(function Base(container, config) {
     var up = 'path://M 51.5,-0.5 C 51.8333,-0.5 52.1667,-0.5 52.5,-0.5C 40.8726,36.5986 34.8726,74.5986 34.5,113.5C 33.1737,157.536 44.0071,198.203 67,235.5C 93.1981,271.042 127.698,294.875 170.5,307C 233.57,323.426 297.57,328.426 362.5,322C 472.254,311.251 578.421,285.751 681,245.5C 671.834,218.842 662.334,192.175 652.5,165.5C 735.87,189.855 819.203,215.189 902.5,241.5C 903.583,242.365 903.749,243.365 903,244.5C 864.82,327.862 825.82,410.862 786,493.5C 776.625,463.084 765.292,433.417 752,404.5C 633.93,444.314 512.764,469.147 388.5,479C 339.884,482.304 291.551,479.971 243.5,472C 206.607,465.709 172.607,452.376 141.5,432C 89.8682,389.562 50.7015,337.729 24,276.5C -1.47259,213.176 -5.47259,148.509 12,82.5C 20.9124,52.6802 34.079,25.0136 51.5,-0.5 Z';
     var down = 'path://M 785.5,-0.5 C 785.833,-0.5 786.167,-0.5 786.5,-0.5C 826.172,82.6773 865.172,166.177 903.5,250C 903.167,250.5 902.833,251 902.5,251.5C 819.203,277.811 735.87,303.145 652.5,327.5C 662.334,300.825 671.834,274.158 681,247.5C 578.421,207.249 472.254,181.749 362.5,171C 297.57,164.574 233.57,169.574 170.5,186C 86.2856,212.575 41.119,270.075 35,358.5C 33.559,384.315 34.8923,409.982 39,435.5C 42.4106,455.133 46.744,474.467 52,493.5C 13.5073,437.541 -3.15939,375.541 2,307.5C 7.07312,254.278 24.0731,205.278 53,160.5C 77.1037,122.718 106.604,89.5517 141.5,61C 172.607,40.6243 206.607,27.291 243.5,21C 291.551,13.0293 339.884,10.696 388.5,14C 512.764,23.8526 633.93,48.6859 752,88.5C 760.943,67.6142 769.61,46.6142 778,25.5C 781.218,17.0158 783.718,8.34911 785.5,-0.5 Z'
 
+    var seriesDataObj1 = {
+      label:{
+        normal:{
+          show:true,
+          textStyle:{
+            color: '#fff'
+          },
+          formatter:function(params){ //标签内容
+            return  (data.map(e=>e.value)[1]/data.map(e=>e.value)[0]-1).toFixed(2)*100+'%'
+          },
+        }
+      }
+    } 
+
+    var seriesDataObj2 = {
+      label:{
+        normal:{
+          show:true,
+          textStyle:{
+            color: '#fff'
+          },
+          formatter:function(params){ //标签内容
+            return  (data.map(e=>e.value)[1]/data.map(e=>e.value)[0]-1).toFixed(2)*100+'%'
+          }
+        }
+      }
+    } 
+
+    var useArrow = '';
+    var data1 = data.map(e=>e.value)[0];
+    var data2 = data.map(e=>e.value)[1];
+    var arrowPosition = cfg.arrowPosition;
+    console.log('arrowPosition',arrowPosition)
+ 
+    if(arrowPosition == 'top'){
+      console.log("data1",data1)
+      console.log("data2",data2)
+      if(data1<data2){
+        useArrow = upd,
+        console.log("wwwwwwwwwwwww")
+        console.log("data11",data1)
+        console.log("data22",data2)
+        seriesDataObj1["symbolPosition"] = "end",
+        seriesDataObj1["label"]["normal"]["position"] = [60, -10],
+        seriesDataObj1["value"] = data2,
+        seriesDataObj1["symbolOffset"] =  [0, -10]
+      }else{
+        useArrow = downd,
+        console.log("hhhhhhhhhhhhhhhh")
+        console.log("data11",data1)
+        console.log("data22",data2)
+        seriesDataObj2["symbolPosition"] = "end",
+        seriesDataObj2["label"]["normal"]["position"] = [60, -10],
+        seriesDataObj2["value"] = data1
+        seriesDataObj2["symbolOffset"] =  [0, -10]
+      }
+    }
+
+    if(arrowPosition == 'middle'){
+      if(data1<data2){
+        useArrow = upd,
+        console.log("rrrrrrrrrrrr")
+
+        seriesDataObj2["symbolPosition"] = "center",
+        seriesDataObj2["label"]["normal"]["position"] = [-50, 10],
+        seriesDataObj2["value"] = data2,
+        seriesDataObj2["symbolOffset"] =  [-110, '-80%']
+      }else{
+        useArrow = downd,
+        console.log("sssssssssssss")
+
+        seriesDataObj2["symbolPosition"] = "center",
+        seriesDataObj2["label"]["normal"]["position"] = [-50, 10],
+        seriesDataObj2["value"] = data1,
+        seriesDataObj2["symbolOffset"] =  [-110, '-80%']
+      }
+    }
+    
+    
+    console.log("seriesDataObj1",seriesDataObj1);
+    console.log("seriesDataObj2",seriesDataObj2);
+    
+
     option = {
-      // color: ['#ee6666', '#5470c6'],
+      color: ['#ee6666'],
       title: {
-        text:"",
-        textStyle:{}
+        text:cfg.titleGroup.title,
+        left: 'center',
+        textStyle:{
+          color:cfg.titleGroup.titleColor,
+          fontSize:cfg.titleGroup.titleSize
+        }
       },
       legend: {
+        top:'10%',
+        x:'right',
+        padding:[0,0,10,0],
         textStyle:{
           color:cfg.color
         },
         data: ['Arrow', 'Bar']
+      },
+      grid:{
+        top: '35%'  
       },
       xAxis: {
         data: data.map(e=>e.name),
@@ -78,45 +171,21 @@ module.exports = Event.extend(function Base(container, config) {
         {
           type: 'pictorialBar',
           name: 'Arrow',
-          symbol: downd,
-          symbolSize: [120, 80],
+          symbol: useArrow,
+          symbolSize: [100, 50],
           z: 10,
-          
-          data: [
-            {
-              symbolPosition: 'end',
-              symbolOffset: [0, '-100%'],
-              label:{
-                normal:{
-                show:true,
-                position: [75, -20],
-                textStyle:{
-                  color: 'black'
-                }
-                }
-              },  
-            },
-            {
-              value: 110,
-              symbolPosition: 'end',
-              symbolOffset: [0, '-70%'],
-              label:{
-                normal:{
-                show:true,
-                position: [75, -10],
-                textStyle:{
-                  color: '#fff'
-                }
-                }
-              },
-            }
-          ]
+          data: [seriesDataObj1,seriesDataObj2]
         },
         {
           type: 'bar',
           name: 'Bar',
-          barGap: '-100%',
+          // barGap: '30%',
+          barCetagoryGap: '30%',
+          barWidth:100,
           data: data.map(e=>e.value),
+          itemStyle:{
+            color: cfg.color
+          },
           label:{
             normal:{
             show:true,
