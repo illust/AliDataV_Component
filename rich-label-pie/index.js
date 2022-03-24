@@ -16,6 +16,7 @@ module.exports = Event.extend(function Base(container, config) {
   this._data = null;                       //数据
   this.chart = null;                       //图表
   this.init(config);
+  // this.resize()
 }, {
   /**
    * 公有初始化
@@ -148,10 +149,10 @@ module.exports = Event.extend(function Base(container, config) {
   resize: function (width, height) {
     this.updateLayout(width, height);
     //更新图表
-    //this.chart.render({
-    //  width: width,
-    //  height: height
-    //})
+    this.chart.resize({
+     width: width,
+     height: height
+    })
   },
   /**
    * 每个组件根据自身需要,从主题中获取颜色 覆盖到自身配置的颜色中.
@@ -159,8 +160,8 @@ module.exports = Event.extend(function Base(container, config) {
    */
   setColors: function () {
     //比如
-    //var cfg = this.config;
-    //cfg.color = cfg.theme.series[0] || cfg.color;
+    // var cfg = this.config;
+    // cfg.color = cfg.theme.series[0] || cfg.color;
   },
   /**
    * 数据,设置和获取数据

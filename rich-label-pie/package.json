@@ -1,6 +1,6 @@
 {
-  "name": "@sgcc-firstcomponent/rich-label-pie",
-  "version": "0.0.1",
+  "name": "@sven.wong/rich-label-pie",
+  "version": "0.0.2",
   "dependencies": {
     "bcore": "0.0.18",
     "jquery": "2.1.4",
@@ -15,8 +15,8 @@
       "regular"
     ],
     "view": {
-      "width": "800",
-      "height": "600",
+      "width": 716,
+      "height": 465,
       "minWidth": "200",
       "minHeight": "100"
     },
