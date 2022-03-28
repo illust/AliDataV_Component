@@ -45,6 +45,9 @@ module.exports = Event.extend(function Base(container, config) {
     //this.chart.render(data, cfg);
     // this.container.html(data[0].value)
     //如果有需要的话,更新样式
+    console.log("hhh",cfg.options);
+
+    
 
     option = {
       tooltip: {
@@ -52,11 +55,14 @@ module.exports = Event.extend(function Base(container, config) {
         formatter: '{b}: {c} ({d}%)'
       },
       title: {
-        text:cfg.titleGroup.title,
+        text:cfg.options.chart.title.content,
+        show:cfg.options.chart.title.show,
         left: 'center',
         textStyle:{
-          color:cfg.titleGroup.titleColor,
-          fontSize:cfg.titleGroup.titleSize
+          color:cfg.options.chart.title.textStyle.color,
+          fontSize:cfg.options.chart.title.textStyle.fontSize,
+          fontWeight:cfg.options.chart.title.textStyle.fontWeight,
+          fontFamily:cfg.options.chart.title.textStyle.fontFamily
         }
       },
       grid:{
@@ -66,9 +72,10 @@ module.exports = Event.extend(function Base(container, config) {
         // top:'10%',
         // bottom:'20%',
         // left:'center',
-        x:'center',
-        y:'bottom',
-        orient:'horizontal',
+        show:cfg.options.chart.numericalLabel.show,
+        x:cfg.options.chart.numericalLabel.pos.horizontal,
+        y:cfg.options.chart.numericalLabel.pos.vertical,
+        orient:cfg.options.chart.numericalLabel.direction,
         align:'left',
         textStyle:{
           color:'#fff'
@@ -101,32 +108,26 @@ module.exports = Event.extend(function Base(container, config) {
           labelLine: {
             length: 30
           },
+          // labelLine:cfg.options.chart.label.show,
           label: {
-            formatter: '{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
-            backgroundColor: '#F6F8FC',
+            show:cfg.options.chart.label.show,
+            formatter: '{hr|}{b|{b}：}{c|{c}}  {per|{d}%}  ',
+            backgroundColor: cfg.options.chart.label.bgColor,
             borderColor: '#8C8D8E',
             borderWidth: 1,
             borderRadius: 4,
             rich: {
-              a: {
-                color: '#6E7079',
-                lineHeight: 22,
-                align: 'center'
-              },
-              hr: {
-                borderColor: '#8C8D8E',
-                width: '100%',
-                height: 0
-              },
-              b: {
-                color: '#4C5058',
-                fontSize: 14,
-                fontWeight: 'bold',
+              hr:{
                 lineHeight: 33
               },
+              b: cfg.options.chart.label.numName,
+              c: {
+                fontSize:cfg.options.chart.label.number
+              },
               per: {
-                color: '#fff',
-                backgroundColor: '#4C5058',
+                color: cfg.options.chart.label.percentTextColor,
+                backgroundColor: cfg.options.chart.label.percentBgColor,
+                fontSize:cfg.options.chart.label.number,
                 padding: [3, 4],
                 borderRadius: 4
               }
