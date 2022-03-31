@@ -1,6 +1,6 @@
 {
   "name": "@sven.wong/rich-label-pie",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "dependencies": {
     "bcore": "0.0.18",
     "jquery": "2.1.4",
@@ -184,18 +184,18 @@
                       "fontFamily": "Microsoft Yahei",
                       "fontWeight": "normal",
                       "fontSize": 18,
-                      "color": "#000",
-                      "lineHeight": 33
+                      "color": "#000"
                     }
                   },
                   "number": {
-                    "type": "number",
-                    "name": "数字字号",
-                    "default": 18,
-                    "range": [
-                      10,
-                      55
-                    ]
+                    "type": "font",
+                    "name": "数字",
+                    "default": {
+                      "fontFamily": "Microsoft Yahei",
+                      "fontWeight": "normal",
+                      "fontSize": 18,
+                      "color": "#000"
+                    }
                   },
                   "percentTextColor": {
                     "type": "fill",

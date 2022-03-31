@@ -78,7 +78,10 @@ module.exports = Event.extend(function Base(container, config) {
         orient:cfg.options.chart.numericalLabel.direction,
         align:'left',
         textStyle:{
-          color:'#fff'
+          color:cfg.options.chart.numericalLabel.textStyle.color,
+          fontFamily:cfg.options.chart.numericalLabel.textStyle.fontFamily,
+          fontSize:cfg.options.chart.numericalLabel.textStyle.fontSize,
+          fontWeight:cfg.options.chart.numericalLabel.textStyle.fontWeight
         },
         data: data.map(e=>e.name)
       },
@@ -122,12 +125,15 @@ module.exports = Event.extend(function Base(container, config) {
               },
               b: cfg.options.chart.label.numName,
               c: {
-                fontSize:cfg.options.chart.label.number
+                fontSize: cfg.options.chart.label.number.fontSize,
+                color: cfg.options.chart.label.number.color,
+                fontWeight: cfg.options.chart.label.number.fontWeight,
+                fontFamily: cfg.options.chart.label.number.fontFamily
               },
               per: {
                 color: cfg.options.chart.label.percentTextColor,
                 backgroundColor: cfg.options.chart.label.percentBgColor,
-                fontSize:cfg.options.chart.label.number,
+                fontSize: cfg.options.chart.label.number.fontSize,
                 padding: [3, 4],
                 borderRadius: 4
               }

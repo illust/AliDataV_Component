@@ -2,7 +2,7 @@ var Event = require('bcore/event');
 var $ = require('jquery');
 var _ = require('lodash');
 var Echarts = require('echarts');
-const { max } = require('lodash');
+const { max, sortedLastIndex } = require('lodash');
 //var Chart = require('XXX');
 
 /**
@@ -80,7 +80,7 @@ module.exports = Event.extend(function Base(container, config) {
     var useArrow = '';
     var data1 = data.map(e=>e.value)[0];
     var data2 = data.map(e=>e.value)[1];
-    var arrowPosition = cfg.arrowPosition;
+    var arrowPosition = cfg.options.chart.arrowPosition;
     console.log('arrowPosition',arrowPosition)
  
     if(arrowPosition == 'top'){
@@ -130,24 +130,51 @@ module.exports = Event.extend(function Base(container, config) {
     
     console.log("seriesDataObj1",seriesDataObj1);
     console.log("seriesDataObj2",seriesDataObj2);
+
+    var arrowObj =  {
+      type: 'pictorialBar',
+      show: false,
+      name: 'Arrow',
+      symbol: useArrow,
+      symbolSize: [100, 50],
+      z: 10,
+      data: [seriesDataObj1,seriesDataObj2]
+    }
+
+    console.log("options",cfg.options);
     
 
     option = {
       color: ['#ee6666'],
       title: {
-        text:cfg.titleGroup.title,
+        text:cfg.options.chart.title.content,
+        show:cfg.options.chart.title.show,
         left: 'center',
         textStyle:{
-          color:cfg.titleGroup.titleColor,
-          fontSize:cfg.titleGroup.titleSize
+          color:cfg.options.chart.title.textStyle.color,
+          fontSize:cfg.options.chart.title.textStyle.fontSize,
+          fontWeight:cfg.options.chart.title.textStyle.fontWeight,
+          fontFamily:cfg.options.chart.title.textStyle.fontFamily
         }
       },
       legend: {
-        top:'10%',
-        x:'right',
-        padding:[0,0,10,0],
+        // top:'10%',
+        // x:'right',
+        // padding:[0,0,10,0],
+        // textStyle:{
+        //   color:cfg.color
+        // },
+
+        show:cfg.options.chart.numericalLabel.show,
+        x:cfg.options.chart.numericalLabel.pos.horizontal,
+        y:cfg.options.chart.numericalLabel.pos.vertical,
+        orient:cfg.options.chart.numericalLabel.direction,
+        align:'left',
         textStyle:{
-          color:cfg.color
+          color:cfg.options.chart.numericalLabel.textStyle.color,
+          fontSize:cfg.options.chart.numericalLabel.textStyle.fontSize,
+          fontWeight:cfg.options.chart.numericalLabel.textStyle.fontWeight,
+          fontFamily:cfg.options.chart.numericalLabel.textStyle.fontFamily
         },
         data: ['Arrow', 'Bar']
       },
@@ -156,26 +183,90 @@ module.exports = Event.extend(function Base(container, config) {
       },
       xAxis: {
         data: data.map(e=>e.name),
+        show: cfg.options.axis.xaxis.isShow,
         axisTick: {
           show: false
         },
+        axisLine:{
+          show: cfg.options.axis.xaxis.axisLine.show,
+          lineStyle:{
+            type: "solid",
+            color: cfg.options.axis.xaxis.axisLine.color,
+            width: cfg.options.axis.xaxis.axisLine.width
+          }
+        },
         axisLabel: {
+          show: cfg.options.axis.xaxis.label.show, 
+          fontFamily: cfg.options.axis.xaxis.label.textarea.fontFamily,
+          fontSize: cfg.options.axis.xaxis.label.textarea.fontSize,
+          fontWeight: cfg.options.axis.xaxis.label.textarea.fontWeight,
+          color: cfg.options.axis.xaxis.label.textarea.color,
           interval: 0
         }
       },
-      yAxis: {
+      yAxis: [{
         // max: 'dataMax',
-        splitLine: { show: false }
-      },
-      series: [
-        {
-          type: 'pictorialBar',
-          name: 'Arrow',
-          symbol: useArrow,
-          symbolSize: [100, 50],
-          z: 10,
-          data: [seriesDataObj1,seriesDataObj2]
+        type: 'value',
+        name: cfg.options.axis.yaxis.yname.name,
+        nameLocation: cfg.options.axis.yaxis.yname.nameLocation,
+        nameTextStyle: {
+          color: cfg.options.axis.yaxis.yname.textStyle.color,
+          fontWeight: cfg.options.axis.yaxis.yname.textStyle.fontWeight,
+          fontSize: cfg.options.axis.yaxis.yname.textStyle.fontSize,
+          fontFamily: cfg.options.axis.yaxis.yname.textStyle.fontFamily,
+          padding: [cfg.options.axis.yaxis.yname.padding.top,cfg.options.axis.yaxis.yname.padding.right,cfg.options.axis.yaxis.yname.padding.bottom,cfg.options.axis.yaxis.yname.padding.left]
         },
+        nameGap: cfg.options.axis.yaxis.yname.nameGap,
+        splitLine: { show: false },
+        show: cfg.options.axis.yaxis.isShow,
+        axisLine:{
+          show: cfg.options.axis.yaxis.axisLine.show,
+          lineStyle:{
+            type: "solid",
+            color: cfg.options.axis.yaxis.axisLine.color,
+            width: cfg.options.axis.yaxis.axisLine.width
+          }
+        },
+        axisLabel: {
+          show: cfg.options.axis.yaxis.label.show, 
+          fontFamily: cfg.options.axis.yaxis.label.textarea.fontFamily,
+          fontSize: cfg.options.axis.yaxis.label.textarea.fontSize,
+          fontWeight: cfg.options.axis.yaxis.label.textarea.fontWeight,
+          color: cfg.options.axis.yaxis.label.textarea.color,
+          interval: 0
+        }
+      },{
+        type: 'value',
+        name: cfg.options.axis.yaxis2.yname.name,
+        nameLocation: cfg.options.axis.yaxis2.yname.nameLocation,
+        nameTextStyle: {
+          color: cfg.options.axis.yaxis2.yname.textStyle.color,
+          fontWeight: cfg.options.axis.yaxis2.yname.textStyle.fontWeight,
+          fontSize: cfg.options.axis.yaxis2.yname.textStyle.fontSize,
+          fontFamily: cfg.options.axis.yaxis2.yname.textStyle.fontFamily,
+          padding: [cfg.options.axis.yaxis2.yname.padding.top,cfg.options.axis.yaxis2.yname.padding.right,cfg.options.axis.yaxis2.yname.padding.bottom,cfg.options.axis.yaxis2.yname.padding.left]
+        },
+        splitLine: { show: false },
+        show: cfg.options.axis.yaxis2.isShow,
+        axisLine:{
+          show: cfg.options.axis.yaxis2.axisLine.show,
+          lineStyle:{
+            type: "solid",
+            color: cfg.options.axis.yaxis2.axisLine.color,
+            width: cfg.options.axis.yaxis2.axisLine.width
+          }
+        },
+        axisLabel: {
+          show: cfg.options.axis.yaxis2.label.show, 
+          fontFamily: cfg.options.axis.yaxis2.label.textarea.fontFamily,
+          fontSize: cfg.options.axis.yaxis2.label.textarea.fontSize,
+          fontWeight: cfg.options.axis.yaxis2.label.textarea.fontWeight,
+          color: cfg.options.axis.yaxis2.label.textarea.color,
+          formatter: '{value}%',
+          interval: 0
+        }
+      }],
+      series: [
         {
           type: 'bar',
           name: 'Bar',
@@ -184,20 +275,48 @@ module.exports = Event.extend(function Base(container, config) {
           barWidth:100,
           data: data.map(e=>e.value),
           itemStyle:{
-            color: cfg.color
+            color: cfg.options.series.bar.barColor
           },
           label:{
             normal:{
-            show:true,
-            position: 'inside',
-            textStyle:{
-              color: 'white'
+              show: cfg.options.series.bar.barText.show,
+              position: cfg.options.series.bar.barText.position,
+              color: cfg.options.series.bar.barText.textStyle.color,
+              fontFamily: cfg.options.series.bar.barText.textStyle.fontFamily,
+              fontSize: cfg.options.series.bar.barText.textStyle.fontSize,
+              fontWeight: cfg.options.series.bar.barText.textStyle.fontWeight
             }
+          }
+        },
+        {
+          type: 'line',
+          name: 'Line',
+          // barGap: '30%',
+          barCetagoryGap: '30%',
+          barWidth:100,
+          data: data.map(e=>e.value1),
+          itemStyle:{
+            // color: cfg.options.series.line.lineColor
+          },
+          yAxisIndex: 1,
+          label:{
+              normal:{
+              show: cfg.options.series.line.lineText.show,
+              position: cfg.options.series.line.lineText.position,
+              color: cfg.options.series.line.lineText.textStyle.color,
+              fontFamily: cfg.options.series.line.lineText.textStyle.fontFamily,
+              fontSize: cfg.options.series.line.lineText.textStyle.fontSize,
+              fontWeight: cfg.options.series.line.lineText.textStyle.fontWeight
             }
           }
         }
       ]
     };
+    console.log("before series",option.series);
+    if(cfg.options.chart.arrowShow == true){
+      option.series.unshift(arrowObj)
+    }
+    console.log("after series",option.series);
     this.chart.setOption(option);
     //如果有需要的话,更新样式
     this.updateStyle();
@@ -210,10 +329,10 @@ module.exports = Event.extend(function Base(container, config) {
   resize: function (width, height) {
     this.updateLayout(width, height);
     //更新图表
-    //this.chart.render({
-    //  width: width,
-    //  height: height
-    //})
+    this.chart.resize({
+     width: width,
+     height: height
+    })
   },
   /**
    * 每个组件根据自身需要,从主题中获取颜色 覆盖到自身配置的颜色中.
