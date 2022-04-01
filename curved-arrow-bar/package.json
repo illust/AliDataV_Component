@@ -1,6 +1,6 @@
 {
   "name": "@sgcc-firstcomponent/curved-arrow-bar",
-  "version": "0.0.3",
+  "version": "0.0.6",
   "dependencies": {
     "bcore": "0.0.18",
     "jquery": "2.1.4",
@@ -15,7 +15,7 @@
       "regular"
     ],
     "view": {
-      "width": 573,
+      "width": 700,
       "height": 400,
       "minWidth": "200",
       "minHeight": "100"
@@ -40,6 +40,16 @@
             "type": "menuChild",
             "mode": "single",
             "children": {
+              "margin": {
+                "type": "margin",
+                "name": "图形外边距",
+                "default": {
+                  "top": 12,
+                  "bottom": 3,
+                  "left": 3,
+                  "right": 1
+                }
+              },
               "arrowShow": {
                 "name": "箭头开关",
                 "type": "boolean",
@@ -59,6 +69,22 @@
                   }
                 ],
                 "default": "top"
+              },
+              "arrowStyle": {
+                "type": "group",
+                "name": "箭头样式",
+                "children": {
+                  "arrowFont": {
+                    "type": "font",
+                    "name": "字体样式",
+                    "default": {
+                      "fontFamily": "Microsoft Yahei",
+                      "fontWeight": "normal",
+                      "fontSize": 15,
+                      "color": "#fff"
+                    }
+                  }
+                }
               },
               "title": {
                 "name": "标题",
@@ -292,6 +318,14 @@
                           "color": "rgb(144, 160, 174)"
                         }
                       },
+                      "textNum": {
+                        "type": "stepper",
+                        "name": "文字数量",
+                        "step": 1,
+                        "default": 4,
+                        "min": 1,
+                        "max": 10
+                      },
                       "display": {
                         "type": "suite",
                         "name": "轴标签展示",
@@ -443,7 +477,7 @@
                         ]
                       },
                       "padding": {
-                        "type": "margin",
+                        "type": "padding",
                         "name": "名称内边距",
                         "default": {
                           "top": 2,
@@ -870,49 +904,10 @@
                           "color": "rgb(144, 160, 174)"
                         }
                       },
-                      "display": {
-                        "type": "suite",
-                        "name": "轴标签展示",
-                        "children": {
-                          "angle": {
-                            "name": "角度",
-                            "type": "iconRadio",
-                            "default": "0",
-                            "options": [
-                              {
-                                "value": "0",
-                                "label": "水平",
-                                "src": "horizontal"
-                              },
-                              {
-                                "value": "45",
-                                "label": "斜角",
-                                "src": "incline"
-                              },
-                              {
-                                "value": "90",
-                                "label": "垂直",
-                                "src": "vertical"
-                              }
-                            ],
-                            "col": 12
-                          },
-                          "amount": {
-                            "name": "数量",
-                            "type": "stepper",
-                            "default": 0,
-                            "min": 0,
-                            "step": 1,
-                            "description": "坐标轴刻度标签最多显示个数",
-                            "col": 12
-                          },
-                          "unit": {
-                            "type": "text",
-                            "default": "",
-                            "name": "轴单位",
-                            "col": 12
-                          }
-                        }
+                      "percentShow": {
+                        "type": "boolean",
+                        "name": "百分比",
+                        "default": "true"
                       }
                     },
                     "showInPanel": {
@@ -995,19 +990,34 @@
                 "type": "group",
                 "name": "柱图",
                 "children": {
+                  "barName": {
+                    "type": "text",
+                    "name": "数据名称",
+                    "default": ""
+                  },
                   "barColor": {
                     "type": "fill",
                     "name": "柱体颜色",
                     "default": "#40a9ff"
                   },
+                  "barPercent": {
+                    "name": "柱体宽度",
+                    "type": "percent",
+                    "default": 30
+                  },
                   "barText": {
                     "type": "group",
-                    "name": "柱图文字",
+                    "name": "柱图数值",
                     "children": {
                       "show": {
                         "name": "显示/隐藏",
                         "type": "boolean",
                         "default": false
+                      },
+                      "thousandth": {
+                        "type": "boolean",
+                        "name": "开启千分位",
+                        "default": true
                       },
                       "textStyle": {
                         "type": "font",
@@ -1015,7 +1025,7 @@
                         "default": {
                           "fontFamily": "Microsoft Yahei",
                           "fontWeight": "normal",
-                          "fontSize": 20,
+                          "fontSize": 15,
                           "color": "#fff"
                         }
                       },
@@ -1046,14 +1056,92 @@
                 "type": "group",
                 "name": "折线图",
                 "children": {
+                  "lineName": {
+                    "type": "text",
+                    "name": "数据名称",
+                    "default": ""
+                  },
                   "lineColor": {
                     "type": "fill",
                     "name": "折线颜色",
                     "default": "#f5222d"
                   },
+                  "lineWidth": {
+                    "type": "stepper",
+                    "name": "折线宽度",
+                    "step": 1,
+                    "min": 0,
+                    "max": 15,
+                    "default": 2
+                  },
+                  "lineSmooth": {
+                    "type": "stepper",
+                    "name": "折线平滑度",
+                    "step": 0.1,
+                    "min": 0,
+                    "max": 1,
+                    "default": 0
+                  },
+                  "connectNulls": {
+                    "type": "boolean",
+                    "name": "空数据连接",
+                    "default": true
+                  },
+                  "lineSymbol": {
+                    "type": "group",
+                    "name": "拐点图形",
+                    "children": {
+                      "symbol": {
+                        "type": "select",
+                        "name": "样式",
+                        "default": "roundRect",
+                        "options": [
+                          {
+                            "value": "circle",
+                            "label": "圆"
+                          },
+                          {
+                            "value": "rect",
+                            "label": "矩形"
+                          },
+                          {
+                            "value": "roundRect",
+                            "label": "圆角矩形"
+                          },
+                          {
+                            "value": "triangle",
+                            "label": "三角形"
+                          },
+                          {
+                            "value": "diamond",
+                            "label": "钻石"
+                          },
+                          {
+                            "value": "pin",
+                            "label": "顶针"
+                          },
+                          {
+                            "value": "arrow",
+                            "label": "箭头"
+                          },
+                          {
+                            "value": "none",
+                            "label": "空"
+                          }
+                        ]
+                      },
+                      "symbolSize": {
+                        "type": "number",
+                        "name": "字号",
+                        "default": 7,
+                        "min": 1,
+                        "max": 30
+                      }
+                    }
+                  },
                   "lineText": {
                     "type": "group",
-                    "name": "折线文字",
+                    "name": "折线数值",
                     "children": {
                       "show": {
                         "name": "显示/隐藏",
@@ -1066,7 +1154,7 @@
                         "default": {
                           "fontFamily": "Microsoft Yahei",
                           "fontWeight": "normal",
-                          "fontSize": 20,
+                          "fontSize": 15,
                           "color": "#fff"
                         }
                       },
@@ -1102,7 +1190,7 @@
       "source": [
         {
           "name": "上年同期累计数",
-          "value": 1200,
+          "value": 2200,
           "value1": 45
         },
         {
