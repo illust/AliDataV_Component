@@ -1,6 +1,6 @@
 {
   "name": "@sven.wong/rich-label-pie",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "dependencies": {
     "bcore": "0.0.18",
     "jquery": "2.1.4",
@@ -9,7 +9,7 @@
   },
   "datav": {
     "cn_name": "富文本饼环图",
-    "icon": "/icons316x238icon.png?time=1648455865575",
+    "icon": "./icons/316x238icon.png",
     "protocol": 2,
     "type": [
       "regular"
@@ -81,6 +81,22 @@
                   }
                 },
                 "enableHide": true
+              },
+              "radius": {
+                "type": "group",
+                "name": "饼图半径",
+                "children": {
+                  "inRadius": {
+                    "type": "percent",
+                    "name": "内半径",
+                    "default": 45
+                  },
+                  "outRadius": {
+                    "type": "percent",
+                    "name": "外半径",
+                    "default": 60
+                  }
+                }
               },
               "numericalLabel": {
                 "name": "图例",
@@ -176,6 +192,67 @@
                     "name": "背景颜色",
                     "type": "fill",
                     "default": "#fff"
+                  },
+                  "bgBorderColor": {
+                    "name": "边框颜色",
+                    "type": "fill",
+                    "default": "#fff"
+                  },
+                  "bgBorderWidth": {
+                    "name": "边框宽度",
+                    "type": "stepper",
+                    "stepper": 1,
+                    "min": 0,
+                    "max": 10,
+                    "default": 2
+                  },
+                  "bgBorderRadius": {
+                    "name": "边框圆角",
+                    "type": "stepper",
+                    "stepper": 1,
+                    "min": 0,
+                    "max": 20,
+                    "default": 4
+                  },
+                  "width": {
+                    "name": "文本显示宽度",
+                    "type": "stepper",
+                    "stepper": 1,
+                    "min": 0,
+                    "max": 400,
+                    "default": 300
+                  },
+                  "height": {
+                    "name": "文本显示高度",
+                    "type": "stepper",
+                    "stepper": 1,
+                    "min": 0,
+                    "max": 200,
+                    "default": 30
+                  },
+                  "turnLength": {
+                    "name": "引导线长度",
+                    "type": "stepper",
+                    "stepper": 1,
+                    "min": 0,
+                    "max": 30,
+                    "default": 5
+                  },
+                  "minTurnAngle": {
+                    "name": "引导线角度1",
+                    "type": "stepper",
+                    "stepper": 1,
+                    "min": 0,
+                    "max": 180,
+                    "default": 90
+                  },
+                  "maxSurfaceAngle": {
+                    "name": "引导线角度2",
+                    "type": "stepper",
+                    "stepper": 1,
+                    "min": 0,
+                    "max": 180,
+                    "default": 90
                   },
                   "numName": {
                     "type": "font",

@@ -107,18 +107,24 @@ module.exports = Event.extend(function Base(container, config) {
         {
           name: 'Access From',
           type: 'pie',
-          radius: ['45%', '60%'],
+          radius: [cfg.options.chart.radius.inRadius, cfg.options.chart.radius.outRadius],
           labelLine: {
-            length: 30
+            length: cfg.options.chart.label.turnLength,
+            minTurnAngle: cfg.options.chart.label.minTurnAngle,
+            maxSurfaceAngle: cfg.options.chart.label.maxSurfaceAngle,
           },
           // labelLine:cfg.options.chart.label.show,
           label: {
             show:cfg.options.chart.label.show,
             formatter: '{hr|}{b|{b}：}{c|{c}}  {per|{d}%}  ',
             backgroundColor: cfg.options.chart.label.bgColor,
-            borderColor: '#8C8D8E',
-            borderWidth: 1,
-            borderRadius: 4,
+            borderColor: cfg.options.chart.label.bgBorderColor,
+            borderWidth: cfg.options.chart.label.bgBorderWidth,
+            borderRadius: cfg.options.chart.label.bgBorderRadius,
+            width: cfg.options.chart.label.width,
+            height: cfg.options.chart.label.height,
+            // overflow: 'break',
+            alignTo: 'labelLine',
             rich: {
               hr:{
                 lineHeight: 33
