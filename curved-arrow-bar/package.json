@@ -1,6 +1,6 @@
 {
   "name": "@sgcc-firstcomponent/curved-arrow-bar",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "dependencies": {
     "bcore": "0.0.18",
     "jquery": "2.1.4",
@@ -9,7 +9,7 @@
   },
   "datav": {
     "cn_name": "箭头柱图",
-    "icon": "",
+    "icon": "./icons/arrow-bar.png",
     "protocol": 2,
     "type": [
       "regular"
@@ -74,14 +74,80 @@
                 "type": "group",
                 "name": "箭头样式",
                 "children": {
-                  "arrowFont": {
+                  "arrowTextFont": {
                     "type": "font",
-                    "name": "字体样式",
+                    "name": "文本样式",
                     "default": {
                       "fontFamily": "Microsoft Yahei",
                       "fontWeight": "normal",
                       "fontSize": 15,
                       "color": "#fff"
+                    }
+                  },
+                  "arrowTextPosition": {
+                    "type": "group",
+                    "name": "文本位置",
+                    "children": {
+                      "x": {
+                        "type": "slider",
+                        "name": "横向",
+                        "default": 60,
+                        "step": 1,
+                        "min": -300,
+                        "max": 300
+                      },
+                      "y": {
+                        "type": "slider",
+                        "name": "纵向",
+                        "default": -10,
+                        "step": 1,
+                        "min": -300,
+                        "max": 300
+                      }
+                    }
+                  },
+                  "arrowSize": {
+                    "type": "group",
+                    "name": "箭头尺寸",
+                    "children": {
+                      "arrowWidth": {
+                        "type": "stepper",
+                        "name": "箭头宽度",
+                        "step": 1,
+                        "default": 100,
+                        "min": 1,
+                        "max": 200
+                      },
+                      "arrowHeight": {
+                        "type": "stepper",
+                        "name": "箭头高度",
+                        "step": 1,
+                        "default": 50,
+                        "min": 1,
+                        "max": 200
+                      }
+                    }
+                  },
+                  "arrowPosition": {
+                    "type": "group",
+                    "name": "箭头位置",
+                    "children": {
+                      "x": {
+                        "type": "slider",
+                        "name": "横向",
+                        "default": -110,
+                        "step": 1,
+                        "min": -300,
+                        "max": 300
+                      },
+                      "y": {
+                        "type": "slider",
+                        "name": "纵向",
+                        "default": -60,
+                        "step": 1,
+                        "min": -300,
+                        "max": 300
+                      }
                     }
                   }
                 }

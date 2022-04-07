@@ -53,10 +53,10 @@ module.exports = Event.extend(function Base(container, config) {
       label:{
         normal:{
           show:true,
-          color: cfg.options.chart.arrowStyle.arrowFont.color,
-          fontFamily: cfg.options.chart.arrowStyle.arrowFont.fontFamily,
-          fontWeight: cfg.options.chart.arrowStyle.arrowFont.fontWeight,
-          fontSize: cfg.options.chart.arrowStyle.arrowFont.fontSize,
+          color: cfg.options.chart.arrowStyle.arrowTextFont.color,
+          fontFamily: cfg.options.chart.arrowStyle.arrowTextFont.fontFamily,
+          fontWeight: cfg.options.chart.arrowStyle.arrowTextFont.fontWeight,
+          fontSize: cfg.options.chart.arrowStyle.arrowTextFont.fontSize,
           // position: [cfg.options.chart.arrowStyle.textPosition.xPosition,cfg.options.chart.arrowStyle.textPosition.xPosition],
           // distance: cfg.options.chart.arrowStyle.distance,
           formatter:function(params){ //标签内容
@@ -70,10 +70,10 @@ module.exports = Event.extend(function Base(container, config) {
       label:{
         normal:{
           show:true,
-          color: cfg.options.chart.arrowStyle.arrowFont.color,
-          fontFamily: cfg.options.chart.arrowStyle.arrowFont.fontFamily,
-          fontWeight: cfg.options.chart.arrowStyle.arrowFont.fontWeight,
-          fontSize: cfg.options.chart.arrowStyle.arrowFont.fontSize,
+          color: cfg.options.chart.arrowStyle.arrowTextFont.color,
+          fontFamily: cfg.options.chart.arrowStyle.arrowTextFont.fontFamily,
+          fontWeight: cfg.options.chart.arrowStyle.arrowTextFont.fontWeight,
+          fontSize: cfg.options.chart.arrowStyle.arrowTextFont.fontSize,
           // position: [cfg.options.chart.arrowStyle.textPosition.xPosition,cfg.options.chart.arrowStyle.textPosition.xPosition],
           // distance: cfg.options.chart.arrowStyle.distance,
           formatter:function(params){ //标签内容
@@ -98,18 +98,18 @@ module.exports = Event.extend(function Base(container, config) {
         console.log("data11",data1)
         console.log("data22",data2)
         seriesDataObj1["symbolPosition"] = "end",
-        seriesDataObj1["label"]["normal"]["position"] = [60, -10],
+        seriesDataObj1["label"]["normal"]["position"] = [cfg.options.chart.arrowStyle.arrowTextPosition.x, cfg.options.chart.arrowStyle.arrowTextPosition.y],
         seriesDataObj1["value"] = data2,
-        seriesDataObj1["symbolOffset"] =  [0, -10]
+        seriesDataObj1["symbolOffset"] =  [cfg.options.chart.arrowStyle.arrowPosition.x, cfg.options.chart.arrowStyle.arrowPosition.y]
       }else{
         useArrow = downd,
         console.log("hhhhhhhhhhhhhhhh")
         console.log("data11",data1)
         console.log("data22",data2)
         seriesDataObj2["symbolPosition"] = "end",
-        seriesDataObj2["label"]["normal"]["position"] = [60, -10],
+        seriesDataObj2["label"]["normal"]["position"] = [cfg.options.chart.arrowStyle.arrowTextPosition.x, cfg.options.chart.arrowStyle.arrowTextPosition.y],
         seriesDataObj2["value"] = data1
-        seriesDataObj2["symbolOffset"] =  [0, -10]
+        seriesDataObj2["symbolOffset"] =  [cfg.options.chart.arrowStyle.arrowPosition.x, cfg.options.chart.arrowStyle.arrowPosition.y]
       }
     }
 
@@ -119,17 +119,17 @@ module.exports = Event.extend(function Base(container, config) {
         console.log("rrrrrrrrrrrr")
 
         seriesDataObj2["symbolPosition"] = "center",
-        seriesDataObj2["label"]["normal"]["position"] = [-50, 10],
+        seriesDataObj2["label"]["normal"]["position"] = [cfg.options.chart.arrowStyle.arrowTextPosition.x, cfg.options.chart.arrowStyle.arrowTextPosition.y],
         seriesDataObj2["value"] = data2,
-        seriesDataObj2["symbolOffset"] =  [-110, '-80%']
+        seriesDataObj2["symbolOffset"] =  [cfg.options.chart.arrowStyle.arrowPosition.x, cfg.options.chart.arrowStyle.arrowPosition.y]
       }else{
         useArrow = downd,
         console.log("sssssssssssss")
 
         seriesDataObj2["symbolPosition"] = "center",
-        seriesDataObj2["label"]["normal"]["position"] = [-50, 10],
+        seriesDataObj2["label"]["normal"]["position"] = [cfg.options.chart.arrowStyle.arrowTextPosition.x, cfg.options.chart.arrowStyle.arrowTextPosition.y],
         seriesDataObj2["value"] = data1,
-        seriesDataObj2["symbolOffset"] =  [-110, '-80%']
+        seriesDataObj2["symbolOffset"] =  [cfg.options.chart.arrowStyle.arrowPosition.x, cfg.options.chart.arrowStyle.arrowPosition.y]
       }
     }
     
@@ -142,7 +142,7 @@ module.exports = Event.extend(function Base(container, config) {
       show: false,
       name: 'Arrow',
       symbol: useArrow,
-      symbolSize: [100, 50],
+      symbolSize: [cfg.options.chart.arrowStyle.arrowSize.arrowWidth, cfg.options.chart.arrowStyle.arrowSize.arrowHeight],
       z: 10,
       data: [seriesDataObj1,seriesDataObj2]
     }
@@ -367,7 +367,7 @@ module.exports = Event.extend(function Base(container, config) {
     if(cfg.options.chart.arrowShow == true){
       option.series.unshift(arrowObj)
     }
-    console.log("after series",option.series);
+
     this.chart.setOption(option);
     //如果有需要的话,更新样式
     this.updateStyle();

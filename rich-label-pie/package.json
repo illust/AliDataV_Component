@@ -1,6 +1,6 @@
 {
   "name": "@sven.wong/rich-label-pie",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "dependencies": {
     "bcore": "0.0.18",
     "jquery": "2.1.4",
@@ -89,12 +89,13 @@
                   "inRadius": {
                     "type": "percent",
                     "name": "内半径",
-                    "default": 45
+                    "default": 40
                   },
                   "outRadius": {
                     "type": "percent",
                     "name": "外半径",
-                    "default": 60
+                    "default": 80,
+                    "min": 60
                   }
                 }
               },

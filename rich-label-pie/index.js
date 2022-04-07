@@ -107,7 +107,7 @@ module.exports = Event.extend(function Base(container, config) {
         {
           name: 'Access From',
           type: 'pie',
-          radius: [cfg.options.chart.radius.inRadius, cfg.options.chart.radius.outRadius],
+          radius: [cfg.options.chart.radius.inRadius, '65%'],
           labelLine: {
             length: cfg.options.chart.label.turnLength,
             minTurnAngle: cfg.options.chart.label.minTurnAngle,
