@@ -1,6 +1,6 @@
 {
   "name": "@sgcc-firstcomponent/curved-arrow-bar",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "dependencies": {
     "bcore": "0.0.18",
     "jquery": "2.1.4",
@@ -392,49 +392,13 @@
                         "min": 1,
                         "max": 10
                       },
-                      "display": {
-                        "type": "suite",
-                        "name": "轴标签展示",
-                        "children": {
-                          "angle": {
-                            "name": "角度",
-                            "type": "iconRadio",
-                            "default": "0",
-                            "options": [
-                              {
-                                "value": "0",
-                                "label": "水平",
-                                "src": "horizontal"
-                              },
-                              {
-                                "value": "45",
-                                "label": "斜角",
-                                "src": "incline"
-                              },
-                              {
-                                "value": "90",
-                                "label": "垂直",
-                                "src": "vertical"
-                              }
-                            ],
-                            "col": 12
-                          },
-                          "amount": {
-                            "name": "数量",
-                            "type": "stepper",
-                            "default": 0,
-                            "min": 0,
-                            "step": 1,
-                            "description": "坐标轴刻度标签最多显示个数",
-                            "col": 12
-                          },
-                          "unit": {
-                            "type": "text",
-                            "default": "",
-                            "name": "轴单位",
-                            "col": 12
-                          }
-                        }
+                      "textMargin": {
+                        "type": "stepper",
+                        "name": "文字距离",
+                        "default": 5,
+                        "min": 0,
+                        "max": 50,
+                        "stepper": 1
                       }
                     },
                     "showInPanel": {

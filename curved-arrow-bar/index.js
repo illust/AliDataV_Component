@@ -206,6 +206,7 @@ module.exports = Event.extend(function Base(container, config) {
           fontWeight: cfg.options.axis.xaxis.label.textarea.fontWeight,
           color: cfg.options.axis.xaxis.label.textarea.color,
           interval: 0,
+          margin: cfg.options.axis.xaxis.label.textMargin,
           formatter: function(params) {
             var newParamsName = ""; // 最终拼接成的字符串
             var paramsNameNumber = params.length; // 实际标签的个数

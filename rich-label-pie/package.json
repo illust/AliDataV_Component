@@ -1,6 +1,6 @@
 {
   "name": "@sven.wong/rich-label-pie",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "dependencies": {
     "bcore": "0.0.18",
     "jquery": "2.1.4",
@@ -15,7 +15,7 @@
       "regular"
     ],
     "view": {
-      "width": 716,
+      "width": 1023,
       "height": 465,
       "minWidth": "200",
       "minHeight": "100"
@@ -220,7 +220,7 @@
                     "type": "stepper",
                     "stepper": 1,
                     "min": 0,
-                    "max": 400,
+                    "max": 4000,
                     "default": 300
                   },
                   "height": {
@@ -228,7 +228,7 @@
                     "type": "stepper",
                     "stepper": 1,
                     "min": 0,
-                    "max": 200,
+                    "max": 800,
                     "default": 30
                   },
                   "turnLength": {
