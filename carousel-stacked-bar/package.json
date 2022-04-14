@@ -1,0 +1,97 @@
+{
+  "name": "@sgcc-firstcomponent/carousel-stacked-bar",
+  "version": "0.0.10",
+  "dependencies": {
+    "bcore": "0.0.18",
+    "echarts": "^5.2.0",
+    "jquery": "2.1.4",
+    "lodash": "4.6.1"
+  },
+  "datav": {
+    "cn_name": "轮播堆叠柱状图",
+    "icon": "",
+    "protocol": 2,
+    "type": [
+      "r"
+    ],
+    "view": {
+      "width": "600",
+      "height": "400",
+      "minWidth": "200",
+      "minHeight": "100"
+    },
+    "apis": {
+      "source": {
+        "handler": "render",
+        "description": "接口描述",
+        "fields": {
+          "value": {
+            "description": "值说明"
+          }
+        }
+      }
+    },
+    "config": {
+      "options": {
+        "name": "菜单",
+        "type": "menu",
+        "children": {
+          "menuA": {
+            "name": "菜单A",
+            "mode": "single",
+            "children": {
+              "switch": {
+                "name": "开关",
+                "type": "switch"
+              }
+            }
+          },
+          "menuB": {
+            "name": "菜单B",
+            "mode": "multiple",
+            "children": {
+              "menuB1": {
+                "name": "菜单B1",
+                "children": {
+                  "text": {
+                    "name": "文本",
+                    "type": "text"
+                  }
+                }
+              },
+              "menuB2": {
+                "name": "菜单B2",
+                "children": {
+                  "stepper": {
+                    "name": "步进器",
+                    "type": "stepper"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "default": {
+          "menuA": {
+            "switch": true
+          },
+          "menuB": {
+            "menuB1": {
+              "text": "Hello"
+            },
+            "menuB2": {
+              "stepper": 1
+            }
+          }
+        }
+      }
+    },
+    "api_data": {
+      "source": [
+        {
+          "value": "值"
+        }
+      ]
+    }
+  }
+}
