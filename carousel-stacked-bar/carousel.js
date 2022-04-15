@@ -99,7 +99,8 @@ export const autoToolTip = (chart, chartOption, options) => {
 
       // 显示 tooltip
       tipParams.type = "showTip";
-      tipParams.dataIndex = dataIndex === 0 ? dataLen - 1 : dataIndex - 1
+      tipParams.dataIndex = dataIndex
+      console.log("dataIndex",dataIndex)  
       console.log("tipParams",tipParams);
       chart.dispatchAction(tipParams);
 
