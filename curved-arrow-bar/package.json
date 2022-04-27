@@ -1,6 +1,6 @@
 {
   "name": "@sgcc-firstcomponent/curved-arrow-bar",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "dependencies": {
     "bcore": "0.0.18",
     "jquery": "2.1.4",
@@ -106,6 +106,14 @@
                       }
                     }
                   },
+                  "arrowPercentPoint": {
+                    "name": "箭头百分比位数",
+                    "type": "stepper",
+                    "default": 1,
+                    "min": 0,
+                    "max": 10,
+                    "step": 1
+                  },
                   "arrowSize": {
                     "type": "group",
                     "name": "箭头尺寸",
@@ -114,17 +122,17 @@
                         "type": "stepper",
                         "name": "箭头宽度",
                         "step": 1,
-                        "default": 100,
+                        "default": 200,
                         "min": 1,
-                        "max": 200
+                        "max": 2000
                       },
                       "arrowHeight": {
                         "type": "stepper",
                         "name": "箭头高度",
                         "step": 1,
-                        "default": 50,
+                        "default": 200,
                         "min": 1,
-                        "max": 200
+                        "max": 2000
                       }
                     }
                   },
@@ -1220,12 +1228,12 @@
       "source": [
         {
           "name": "上年同期累计数",
-          "value": 2200,
+          "value": 2800,
           "value1": 45
         },
         {
           "name": "本期累计数",
-          "value": 1800,
+          "value": 2800,
           "value1": 65
         }
       ]

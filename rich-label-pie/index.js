@@ -116,7 +116,11 @@ module.exports = Event.extend(function Base(container, config) {
           // labelLine:cfg.options.chart.label.show,
           label: {
             show:cfg.options.chart.label.show,
-            formatter: '{hr|}{b|{b}：}{c|{c}}  {per|{d}%}  ',
+            // formatter: '{hr|}{b|{b}：}{c|{c}}  {per|({d}%)}  ',
+            formatter: function(params){
+              str = '{hr|}{b|' + params.name + '：}{c|'+ params.data.value +'}  {per|' +'(' + params.percent.toFixed(cfg.options.chart.label.percentPoint) + '%)}  '
+              return str
+            },
             backgroundColor: cfg.options.chart.label.bgColor,
             borderColor: cfg.options.chart.label.bgBorderColor,
             borderWidth: cfg.options.chart.label.bgBorderWidth,

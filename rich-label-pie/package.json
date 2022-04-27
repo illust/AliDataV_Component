@@ -1,6 +1,6 @@
 {
   "name": "@sven.wong/rich-label-pie",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "dependencies": {
     "bcore": "0.0.18",
     "jquery": "2.1.4",
@@ -236,7 +236,7 @@
                     "type": "stepper",
                     "stepper": 1,
                     "min": 0,
-                    "max": 30,
+                    "max": 200,
                     "default": 5
                   },
                   "minTurnAngle": {
@@ -274,6 +274,14 @@
                       "fontSize": 18,
                       "color": "#000"
                     }
+                  },
+                  "percentPoint": {
+                    "name": "百分比位数",
+                    "type": "stepper",
+                    "default": 1,
+                    "min": 0,
+                    "max": 10,
+                    "step": 1
                   },
                   "percentTextColor": {
                     "type": "fill",
