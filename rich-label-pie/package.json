@@ -1,6 +1,6 @@
 {
   "name": "@sven.wong/rich-label-pie",
-  "version": "0.0.9",
+  "version": "0.0.12",
   "dependencies": {
     "bcore": "0.0.18",
     "jquery": "2.1.4",
@@ -236,7 +236,15 @@
                     "type": "stepper",
                     "stepper": 1,
                     "min": 0,
-                    "max": 200,
+                    "max": 2000,
+                    "default": 5
+                  },
+                  "turnLength2": {
+                    "name": "引导线长度2",
+                    "type": "stepper",
+                    "stepper": 1,
+                    "min": 0,
+                    "max": 2000,
                     "default": 5
                   },
                   "minTurnAngle": {
@@ -775,7 +783,7 @@
                 "name": "系列转类型",
                 "default": false
               },
-              "series": {
+              "seriesTab": {
                 "type": "tabs",
                 "name": "数据系列",
                 "default": [
@@ -799,7 +807,8 @@
                       },
                       "components": [
                         "flat",
-                        "linearGradient"
+                        "linearGradient",
+                        "image"
                       ]
                     }
                   }
@@ -813,36 +822,28 @@
     "api_data": {
       "source": [
         {
-          "value": 1048,
+          "value": 62.2,
           "name": "Baidu"
         },
         {
-          "value": 335,
+          "value": 11567.1,
           "name": "Direct"
         },
         {
-          "value": 310,
+          "value": 38314.1,
           "name": "Email"
         },
         {
-          "value": 251,
+          "value": 121655.8,
           "name": "Google"
         },
         {
-          "value": 234,
+          "value": 122268.7,
           "name": "Union Ads"
         },
         {
-          "value": 147,
+          "value": 7915326.3,
           "name": "Bing"
-        },
-        {
-          "value": 135,
-          "name": "Video Ads"
-        },
-        {
-          "value": 102,
-          "name": "Others"
         }
       ]
     }

@@ -45,7 +45,11 @@ module.exports = Event.extend(function Base(container, config) {
     //this.chart.render(data, cfg);
     // this.container.html(data[0].value)
     //如果有需要的话,更新样式
-    console.log("hhh",cfg.options);
+    console.log("cfg.options.series.seriesTab",cfg.options.series.seriesTab);
+    // console.log("cfg.options.series.seriesTab.color.value",cfg.options.series.seriesTab.color.value);
+    console.log("cfg.options.series.seriesTab.map(e=>e.color.value)",cfg.options.series.seriesTab.map(e=>e.color.value));
+    
+    // var seriesColor = cfg.options.series.seriesTab.map()
 
     
 
@@ -65,6 +69,7 @@ module.exports = Event.extend(function Base(container, config) {
           fontFamily:cfg.options.chart.title.textStyle.fontFamily
         }
       },
+      color: cfg.options.series.seriesTab.map(e=>e.color.value),
       grid:{
         top: '35%'  
       },
@@ -110,6 +115,7 @@ module.exports = Event.extend(function Base(container, config) {
           radius: [cfg.options.chart.radius.inRadius, '65%'],
           labelLine: {
             length: cfg.options.chart.label.turnLength,
+            length2: cfg.options.chart.label.turnLength2,
             minTurnAngle: cfg.options.chart.label.minTurnAngle,
             maxSurfaceAngle: cfg.options.chart.label.maxSurfaceAngle,
           },

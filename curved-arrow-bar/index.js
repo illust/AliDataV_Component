@@ -2546,7 +2546,8 @@ module.exports = Event.extend(function Base(container, config) {
           fontWeight: cfg.options.axis.yaxis.label.textarea.fontWeight,
           color: cfg.options.axis.yaxis.label.textarea.color,
           interval: 0
-        }
+        },
+        splitNumber: cfg.options.axis.yaxis.label.display.amount
       },{
         type: 'value',
         name: cfg.options.axis.yaxis2.yname.name,
@@ -2576,7 +2577,8 @@ module.exports = Event.extend(function Base(container, config) {
           color: cfg.options.axis.yaxis2.label.textarea.color,
           formatter: cfg.options.axis.yaxis2.label.percentShow ? '{value} %' : '{value}',
           interval: 0
-        }
+        },
+        splitNumber: cfg.options.axis.yaxis2.label.amount
       }],
       series: [
         {

@@ -1,6 +1,6 @@
 {
   "name": "@sgcc-firstcomponent/curved-arrow-bar",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "dependencies": {
     "bcore": "0.0.18",
     "jquery": "2.1.4",
@@ -681,13 +681,10 @@
                             "col": 12
                           },
                           "amount": {
-                            "name": "数量",
+                            "name": "标签数量",
                             "type": "stepper",
                             "default": 0,
-                            "min": 0,
-                            "step": 1,
-                            "description": "坐标轴刻度标签最多显示个数",
-                            "col": 12
+                            "step": 1
                           },
                           "unit": {
                             "type": "text",
@@ -946,6 +943,12 @@
                         "type": "boolean",
                         "name": "百分比",
                         "default": "true"
+                      },
+                      "amount": {
+                        "name": "标签数量",
+                        "type": "stepper",
+                        "default": 0,
+                        "step": 1
                       }
                     },
                     "showInPanel": {
