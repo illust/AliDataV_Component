@@ -1,5 +1,5 @@
 {
-  "name": "@sgcc-firstcomponent/carousel-stacked-bar",
+  "name": "@sven.wong/carousel-stacked-bar",
   "version": "0.0.10",
   "dependencies": {
     "bcore": "0.0.18",

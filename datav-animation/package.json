@@ -1,5 +1,5 @@
 {
-  "name": "@sgcc-firstcomponent/datav-animation",
+  "name": "@sven.wong/datav-animation",
   "version": "0.0.1",
   "dependencies": {
     "bcore": "0.0.18",
