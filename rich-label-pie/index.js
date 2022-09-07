@@ -112,7 +112,7 @@ module.exports = Event.extend(function Base(container, config) {
         {
           name: 'Access From',
           type: 'pie',
-          radius: [cfg.options.chart.radius.inRadius, '65%'],
+          radius: [cfg.options.chart.radius.inRadius, cfg.options.chart.radius.outRadius],
           labelLine: {
             length: cfg.options.chart.label.turnLength,
             length2: cfg.options.chart.label.turnLength2,
@@ -124,7 +124,7 @@ module.exports = Event.extend(function Base(container, config) {
             show:cfg.options.chart.label.show,
             // formatter: '{hr|}{b|{b}：}{c|{c}}  {per|({d}%)}  ',
             formatter: function(params){
-              str = '{hr|}{b|' + params.name + '：}{c|'+ params.data.value +'}  {per|' +'(' + params.percent.toFixed(cfg.options.chart.label.percentPoint) + '%)}  '
+              str = '{hr|}{b|' + params.name + '：}{c|'+ params.data.value.toString().replace(params.data.value.toString().indexOf(".") > -1 ? /(\d)(?=(\d{3})+\.)/g : /(\d)(?=(?:\d{3})+$)/g, "$1,") +'}  {per|' +'(' + params.percent.toFixed(cfg.options.chart.label.percentPoint) + '%)}  '
               return str
             },
             backgroundColor: cfg.options.chart.label.bgColor,
