@@ -1,22 +1,21 @@
 {
-  "name": "@sven.wong/datav-animation",
+  "name": "@namespace/animation-arrow",
   "version": "0.0.1",
   "dependencies": {
     "bcore": "0.0.18",
     "jquery": "2.1.4",
-    "lodash": "4.6.1",
-    "echarts": "5.0.0"
+    "lodash": "4.6.1"
   },
   "datav": {
-    "cn_name": "动效组件",
+    "cn_name": "动态箭头",
     "icon": "",
     "protocol": 2,
     "type": [
-      "m"
+      "regular"
     ],
     "view": {
-      "width": "900",
-      "height": "600",
+      "width": "400",
+      "height": "200",
       "minWidth": "200",
       "minHeight": "100"
     },
@@ -35,17 +34,20 @@
       "size": {
         "name": "字号",
         "type": "number",
+        "default": 22,
         "range": [
           10,
           100
-        ],
-        "default": 22
+        ]
       }
     },
     "api_data": {
       "source": [
         {
           "value": "值"
+        },
+        {
+          "value": "哈哈哈"
         }
       ]
     }
