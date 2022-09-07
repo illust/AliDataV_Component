@@ -40,130 +40,20 @@ module.exports = Event.extend(function Base(container, config) {
     var cfg = this.mergeConfig(config);
     //更新图表
     //this.chart.render(data, cfg);
-    this.container.html(`<div class="main">
-    <div class="circle1 prop"></div>
-    <div class="void__1 prop_Void"></div>
-    <div class="circle2 prop"></div>
-    <div class="void__2 prop_Void"></div>
-    <div class="circle3 prop"></div>
-    <div class="void__3 prop_Void"></div>
-    <div class="circle3_1 prop"></div>
-    <div class="void__3_1 prop_Void"></div>
-    <div class="circle3_2 prop"></div>
-    <div class="void__3_2 prop_Void"></div>
-    <div class="circle4 prop"></div>
-    <div class="void__4 prop_Void"></div>
-    <div class="circle5 prop"></div>
-    <div class="void__5 prop_Void"></div>
-    <div class="circle6 prop"></div>
-    <div class="void__6 prop_Void"></div>
-    <div class="circle7 prop"></div>
-    <div class="void__7 prop_Void"></div>
-    <div class="circle7_1 prop"></div>
-    <div class="void__7_1 prop_Void"></div>
-    <div class="circle7_2 prop"></div>
-    <div class="void__7_2 prop_Void"></div>
-    <div class="circle8 prop"></div>
-    <div class="void__8 prop_Void"></div>
-    <div class="circle9 prop"></div>
-    <div class="void__9 prop_Void"></div>
-    <div class="circle10 prop"></div>
-    <div class="circle11 prop"></div>
-    <div class="void__11 prop_Void"></div>
-    <div class="circle12 prop"></div>
-    <div class="void__12 prop_Void"></div>
-    <div class="circle13 prop"></div>
-    <div class="void__13 prop_Void"></div>
-    <div class="circle14 prop"></div>
-    <div class="void__14 prop_Void"></div>
-  </div>`)
+    this.container.html(`<svg t="1662590393514" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4681" width="256" height="128"><path class="arrow" d="M512 256V0l512 512-512 512V768H0V256z" p-id="4682" fill="#1296db"></path></svg>`)
 
-    $('div.main').css({
-      "position": "absolute",
-      "width": "410px",
-      "height": "410px",
-      "padding": "100px",
-      "background-color": "#0F0F0F",
-      "top": "50%",
-      "left": "50%",
-      "margin-right": "-50%",
-      "transform": "translate(-50%, -50%)"
-    })
+    var supportedFlag = $.keyframe.isSupported;
+    console.log(supportedFlag);
+    $.keyframe.define([{
+      name: 'blink',
+      '0%': {"opacity": "1"},
+      '50%': {"opacity": "0"},
+      '100%': {"opacity": "1"}
+    }])
 
-    $('div.prop').css({
-      "position": "absolute",
-      "border-radius": "50%"
-    })
-
-    $('div.prop_Void').css({
-      "position": "absolute",
-      "border-radius": "50%",
-      "background-color": "#0F0F0F"
-    })
-
-    $('div.circle1').css({  
-    "width": "400px",
-    "height": "400px",
-    "background": "linear-gradient(30deg, #fff 100%, transparent 100%) 0 0",
-    "background-size": "50% 50%",
-    "background-repeat": "no-repeat"
-  })
-
-  $('div.void__1').css({
-    "width": "386px",
-    "height": "386px",
-    "margin-left": "7px",
-    "margin-top": "7px"
-  })
-
-  $('div.circle2').css({
-    "width": "380px",
-    "height": "380px",
-    "margin-left": "10px",
-    "margin-top": "10px",
-    "background": "linear-gradient(30deg, #a9a9a9 100%, transparent 100%) 0 0",
-    "background-size": "50% 50%",
-    "background-repeat": "no-repeat"
-  })
-
-  $('div.void__2').css({
-    "width": "360px",
-    "height": "360px",
-    "margin-left": "20px",
-    "margin-top": "20px"
-  })
-    console.log(this.container.html);
-
-    $(document).ready(function() {
-      rotateCircles();
-    });
-    
-    function rotateCircles() {
-      $('div[class*="circle"]').each(function() {
-        var that = this,
-          direction = ["-", "+"],
-          chosenDirection = direction[Math.floor(Math.random() * direction.length)],
-          speed = Math.floor((Math.random() * 250) + 100),
-          looper = setInterval(circleMove, 2000);
-    
-        function circleMove() {
-          $(that).animate({
-            rotation: chosenDirection + '=' + speed
-          }, {
-            duration: 2000,
-            easing: 'linear',
-            step: function(now) {
-              $(that).css({
-                "transform": "rotate(" + now + "deg)"
-              });
-            }
-          });
-        }
-        circleMove();
-      });
-    }
-
-
+    $('path.right-arrow').playKeyframe(
+      '1s linear 0s infinite blink'
+    )
     //如果有需要的话,更新样式
     this.updateStyle();
   },

@@ -4,6 +4,7 @@
   "dependencies": {
     "bcore": "0.0.18",
     "jquery": "2.1.4",
+    "jquerykeyframes": "^1.0.8",
     "lodash": "4.6.1"
   },
   "datav": {
