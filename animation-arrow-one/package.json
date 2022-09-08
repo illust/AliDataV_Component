@@ -1,22 +1,21 @@
 {
-  "name": "@sven.wong/animation-arrow",
-  "version": "0.0.3",
+  "name": "@sven.wong/animation-arrow-one",
+  "version": "0.0.2",
   "dependencies": {
     "bcore": "0.0.18",
     "jquery": "2.1.4",
-    "jquerykeyframes": "^1.0.8",
     "lodash": "4.6.1"
   },
   "datav": {
-    "cn_name": "动态箭头",
+    "cn_name": "单个动态箭头",
     "icon": "",
     "protocol": 2,
     "type": [
       "regular"
     ],
     "view": {
-      "width": 827,
-      "height": 634,
+      "width": 702,
+      "height": 200,
       "minWidth": "200",
       "minHeight": "100"
     },
@@ -46,9 +45,6 @@
       "source": [
         {
           "value": "值"
-        },
-        {
-          "value": "哈哈哈"
         }
       ]
     }

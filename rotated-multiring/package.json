@@ -1,22 +1,21 @@
 {
-  "name": "@sven.wong/animation-arrow",
-  "version": "0.0.3",
+  "name": "@namespace/rotated-multiring",
+  "version": "0.0.1",
   "dependencies": {
     "bcore": "0.0.18",
     "jquery": "2.1.4",
-    "jquerykeyframes": "^1.0.8",
     "lodash": "4.6.1"
   },
   "datav": {
-    "cn_name": "动态箭头",
+    "cn_name": "旋转多环",
     "icon": "",
     "protocol": 2,
     "type": [
       "regular"
     ],
     "view": {
-      "width": 827,
-      "height": 634,
+      "width": "400",
+      "height": "200",
       "minWidth": "200",
       "minHeight": "100"
     },
@@ -35,20 +34,17 @@
       "size": {
         "name": "字号",
         "type": "number",
+        "default": 22,
         "range": [
           10,
           100
-        ],
-        "default": 22
+        ]
       }
     },
     "api_data": {
       "source": [
         {
           "value": "值"
-        },
-        {
-          "value": "哈哈哈"
         }
       ]
     }
