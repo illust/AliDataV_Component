@@ -40,103 +40,165 @@ module.exports = Event.extend(function Base(container, config) {
     var cfg = this.mergeConfig(config);
     //更新图表
     //this.chart.render(data, cfg);
-    this.container.html(`<div class="main">
-    <div class="circle1 prop"></div>
-    <div class="void__1 prop_Void"></div>
-    <div class="circle2 prop"></div>
-    <div class="void__2 prop_Void"></div>
-    <div class="circle3 prop"></div>
-    <div class="void__3 prop_Void"></div>
-    <div class="circle3_1 prop"></div>
-    <div class="void__3_1 prop_Void"></div>
-    <div class="circle3_2 prop"></div>
-    <div class="void__3_2 prop_Void"></div>
-    <div class="circle4 prop"></div>
-    <div class="void__4 prop_Void"></div>
-    <div class="circle5 prop"></div>
-    <div class="void__5 prop_Void"></div>
-    <div class="circle6 prop"></div>
-    <div class="void__6 prop_Void"></div>
-    <div class="circle7 prop"></div>
-    <div class="void__7 prop_Void"></div>
-    <div class="circle7_1 prop"></div>
-    <div class="void__7_1 prop_Void"></div>
-    <div class="circle7_2 prop"></div>
-    <div class="void__7_2 prop_Void"></div>
-    <div class="circle8 prop"></div>
-    <div class="void__8 prop_Void"></div>
-    <div class="circle9 prop"></div>
-    <div class="void__9 prop_Void"></div>
-    <div class="circle10 prop"></div>
-    <div class="circle11 prop"></div>
-    <div class="void__11 prop_Void"></div>
-    <div class="circle12 prop"></div>
-    <div class="void__12 prop_Void"></div>
-    <div class="circle13 prop"></div>
-    <div class="void__13 prop_Void"></div>
-    <div class="circle14 prop"></div>
-    <div class="void__14 prop_Void"></div>
-  </div>`)
 
-    $('div.main').css({
-      "position": "absolute",
-      "width": "410px",
-      "height": "410px",
-      "padding": "100px",
-      "background-color": "#0F0F0F",
-      "top": "50%",
-      "left": "50%",
-      "margin-right": "-50%",
-      "transform": "translate(-50%, -50%)"
-    })
 
-    $('div.prop').css({
-      "position": "absolute",
-      "border-radius": "50%"
-    })
+this.container.html(`<div>
+<div class="outerouter"></div>
+<div class="outer"></div>
+<div class="insider"></div>
+<div class="icon"></div>
+</div>
+<style>
+.icon {
+background: transparent;
+  background-color: rgba(11, 181, 197, 0.4);
+  width: 76px;
+  height: 76px;
+  top: -475px;
+  border-radius: 100%;
+  margin: 0 auto;
+  position: relative;
+}
 
-    $('div.prop_Void').css({
-      "position": "absolute",
-      "border-radius": "50%",
-      "background-color": "#0F0F0F"
-    })
+.icon:hover {
+  -moz-animation: rotatecircle 4s infinite linear;
+  -webkit-animation: rotatecircle 4s linear;
+  background-color: antiquewhite;
+}
 
-    $('div.circle1').css({  
-    "width": "400px",
-    "height": "400px",
-    "background": "linear-gradient(30deg, #fff 100%, transparent 100%) 0 0",
-    "background-size": "50% 50%",
-    "background-repeat": "no-repeat"
-  })
+.outerouter{
+  background-color: transparent;
+  border: ${cfg.options.outerRing.thickness}px solid ${cfg.options.outerRing.color};
+  opacity: .9;
+  border-top: ${cfg.options.outerRing.thickness}px solid transparent;
+  border-bottom: ${cfg.options.outerRing.thickness}px solid transparent;
+/* border-right: 5px solid transparent; */
+  border-radius: 210px;
+top: 0px; 
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+position: relative;
+  -moz-animation: spinoffPulse ${cfg.options.outerRing.speed}s infinite linear;
+  -webkit-animation: spinoffPulse ${cfg.options.outerRing.speed}s infinite linear ;
+}
 
-  $('div.void__1').css({
-    "width": "386px",
-    "height": "386px",
-    "margin-left": "7px",
-    "margin-top": "7px"
-  })
+.outer {
+  background-color: transparent;
+  border: ${cfg.options.middleRing.thickness}px solid ${cfg.options.middleRing.color};
+  opacity: .9;
+  border-right: ${cfg.options.middleRing.thickness}px solid transparent;
+  border-left: ${cfg.options.middleRing.thickness}px solid transparent;
+  border-radius: 180px;
+  width: 315px;
+  height: 315px;
+  margin: 0 auto;
+  -moz-animation: spinoffPulse ${cfg.options.middleRing.speed}s infinite linear;
+  -webkit-animation: spinPulse ${cfg.options.middleRing.speed}s infinite linear ;
+  top: 50px;
+  left: 43px;
+  position: fixed;
+}
 
-  $('div.circle2').css({
-    "width": "380px",
-    "height": "380px",
-    "margin-left": "10px",
-    "margin-top": "10px",
-    "background": "linear-gradient(30deg, #a9a9a9 100%, transparent 100%) 0 0",
-    "background-size": "50% 50%",
-    "background-repeat": "no-repeat"
-  })
+.insider {
+  background-color: transparent;
+  border: ${cfg.options.insiderRing.thickness}px solid ${cfg.options.insiderRing.color};
+  opacity: .9;
+  border-left: ${cfg.options.insiderRing.thickness}px solid transparent;
+  border-right: ${cfg.options.insiderRing.thickness}px solid transparent;
+  border-radius: 125px;
+  top: -314px;
+  width: 243px;
+  height: 243px;
+  margin: 0 auto;
+  position: relative;
+  -moz-animation: spinoffPulse ${cfg.options.insiderRing.speed}s infinite linear;
+  -webkit-animation: spinoffPulse ${cfg.options.insiderRing.speed}s infinite linear;
+}
 
-  $('div.void__2').css({
-    "width": "360px",
-    "height": "360px",
-    "margin-left": "20px",
-    "margin-top": "20px"
-  })
+
+
+@-moz-keyframes spinPulse {
+  0% {
+      -moz-transform: rotate(160deg);
+      opacity: 0;
+      box-shadow: 0 0 1px #bdd73c;
+  }
+  50% {
+      -moz-transform: rotate(145deg);
+      opacity: 1;
+  }
+  100% {
+      -moz-transform: rotate(-320deg);
+      opacity: 0;
+  }
+}
+
+@-moz-keyframes spinoffPulse {
+  0% {
+      -moz-transform: rotate(0deg);
+  }
+  100% {
+      -moz-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spinPulse {
+  0% {
+      -webkit-transform: rotate(160deg);
+      opacity: 0;
+      box-shadow: 0 0 1px #bdd73c;
+  }
+  50% {
+      -webkit-transform: rotate(145deg);
+      opacity: 1;
+  }
+  100% {
+      -webkit-transform: rotate(-320deg);
+      opacity: 0;
+  }
+}
+
+@-webkit-keyframes spinoffPulse {
+  0% {
+      -webkit-transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes rotatecircle {
+  0% {
+      -moz-transform: rotate(0deg);
+  }
+  100% {
+      -moz-transform: rotate(-360deg);
+  }
+}
+
+@-webkit-keyframes rotatecircle {
+  0% {
+      -webkit-transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(-360deg);
+  }
+}</style>`)
+
+
+  // $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', `${cfg.cssPath}`) );
+
+
+
+
+
+  
     console.log(this.container.html);
 
-    $(document).ready(function() {
-      rotateCircles();
-    });
+    // $(document).ready(function() {
+    //   rotateCircles();
+    // });
     
     function rotateCircles() {
       $('div[class*="circle"]').each(function() {

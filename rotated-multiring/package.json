@@ -1,6 +1,6 @@
 {
-  "name": "@namespace/rotated-multiring",
-  "version": "0.0.1",
+  "name": "@sven.wong/rotated-multiring",
+  "version": "0.0.6",
   "dependencies": {
     "bcore": "0.0.18",
     "jquery": "2.1.4",
@@ -8,14 +8,14 @@
   },
   "datav": {
     "cn_name": "旋转多环",
-    "icon": "",
+    "icon": "/icons316x238icon.png?time=1663129306248",
     "protocol": 2,
     "type": [
       "regular"
     ],
     "view": {
       "width": "400",
-      "height": "200",
+      "height": "400",
       "minWidth": "200",
       "minHeight": "100"
     },
@@ -31,14 +31,100 @@
       }
     },
     "config": {
-      "size": {
-        "name": "字号",
-        "type": "number",
-        "default": 22,
-        "range": [
-          10,
-          100
-        ]
+      "options": {
+        "type": "menu",
+        "children": {
+          "outerRing": {
+            "name": "外环",
+            "type": "menuChild",
+            "mode": "single",
+            "children": {
+              "speed": {
+                "name": "转速",
+                "type": "number",
+                "default": 2,
+                "range": [
+                  0.1,
+                  10
+                ]
+              },
+              "color": {
+                "type": "fill",
+                "name": "颜色",
+                "default": "rgba(11, 181, 197, 0.9)"
+              },
+              "thickness": {
+                "type": "number",
+                "name": "粗细",
+                "default": "20",
+                "range": [
+                  0,
+                  50
+                ]
+              }
+            }
+          },
+          "middleRing": {
+            "name": "中环",
+            "type": "menuChild",
+            "mode": "single",
+            "children": {
+              "speed": {
+                "name": "转速",
+                "type": "number",
+                "default": 5,
+                "range": [
+                  0.1,
+                  10
+                ]
+              },
+              "color": {
+                "type": "fill",
+                "name": "颜色",
+                "default": "rgba(11, 181, 197, 0.9)"
+              },
+              "thickness": {
+                "type": "number",
+                "name": "粗细",
+                "default": "30",
+                "range": [
+                  0,
+                  50
+                ]
+              }
+            }
+          },
+          "insiderRing": {
+            "name": "内环",
+            "type": "menuChild",
+            "mode": "single",
+            "children": {
+              "speed": {
+                "name": "转速",
+                "type": "number",
+                "default": 1,
+                "range": [
+                  0.1,
+                  10
+                ]
+              },
+              "color": {
+                "type": "fill",
+                "name": "颜色",
+                "default": "rgba(11, 181, 197, 0.9)"
+              },
+              "thickness": {
+                "type": "number",
+                "name": "粗细",
+                "default": "8",
+                "range": [
+                  0,
+                  50
+                ]
+              }
+            }
+          }
+        }
       }
     },
     "api_data": {
