@@ -46,7 +46,6 @@ this.container.html(`<div>
 <div class="outerouter"></div>
 <div class="outer"></div>
 <div class="insider"></div>
-<div class="icon"></div>
 </div>
 <style>
 .icon {
