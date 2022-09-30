@@ -1,5 +1,5 @@
 {
-  "name": "@sven.wong/glow-ring",
+  "name": "@sven.wong/draggable-component",
   "version": "0.0.1",
   "dependencies": {
     "bcore": "0.0.18",
@@ -7,7 +7,7 @@
     "lodash": "4.6.1"
   },
   "datav": {
-    "cn_name": "发光圆环",
+    "cn_name": "拖拽式组件",
     "icon": "",
     "protocol": 2,
     "type": [
