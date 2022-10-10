@@ -41,7 +41,21 @@ module.exports = Event.extend(function Base(container, config) {
     //更新图表
     //this.chart.render(data, cfg);
     this.container.html(`
-    <div></div>
+    <div class="container">
+      <canvas id="canvas"></canvas>
+    </div>
+    <style>
+      .container{
+        margin: 0;
+        overflow: hidden;
+        background: blue;
+      }
+      #canvas{
+        background: rgba(0,0,0,1);
+        position: relative;
+        z-index: 1;
+      }
+    </style>
     `)
     //如果有需要的话,更新样式
     this.updateStyle();
