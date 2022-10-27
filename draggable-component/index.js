@@ -1,6 +1,7 @@
 var Event = require('bcore/event');
 var $ = require('jquery');
 var _ = require('lodash');
+var table = require('tabulator-tables');
 //var Chart = require('XXX');
 
 /**
@@ -38,28 +39,162 @@ module.exports = Event.extend(function Base(container, config) {
   render: function (data, config) {
     data = this.data(data);
     var cfg = this.mergeConfig(config);
+
+    var tabledata = [
+      {id:1, name:"Oli Bob", age:"12", col:"red", dob:""},
+      {id:2, name:"Mary May", age:"1", col:"blue", dob:"14/05/1982"},
+      {id:3, name:"Christine Lobowski", age:"42", col:"green", dob:"22/05/1982"},
+      {id:4, name:"Brendon Philips", age:"125", col:"orange", dob:"01/08/1980"},
+      {id:5, name:"Margret Marmajuke", age:"16", col:"yellow", dob:"31/01/1999"},
+    ];
+
+    console.log(data);
     //更新图表
     //this.chart.render(data, cfg);
     this.container.html(`
     <div class="container">
-      <canvas id="canvas"></canvas>
+      <div class="header">业务人员自主分析平台</div>
+      <div class="main">
+        <div class="toolbox">
+          <div class="tool box1">搜索框</div>
+          <div class="tool box2">饼图</div>
+          <div class="tool box3">柱状图</div>
+        </div>
+        <div id="example-table"></div>
+      </div>
+
     </div>
     <style>
       .container{
+        display: flex;
+        flex-direction: column;
         margin: 0;
         overflow: hidden;
-        background: blue;
+        background: #f4f3f4;
+        width: 100%;
+        height: 100%;
       }
-      #canvas{
-        background: rgba(0,0,0,1);
-        position: relative;
-        z-index: 1;
+      .header{
+        width: 100%;
+        height: 60px;
+        color: green;
+        font-size: 30px;
+        font-weight: 100;
+        text-align: center;
+        background-color: white;
+        position: positive;
+        border-bottom: 1px solid #f4f3f4;
+      }
+      .main{
+        width: 100%;
+        height: 540px;
+        position: positive;
+        display: flex;
+        flex-direction: row;
+      }
+      .toolbox{
+        width: 25%;
+        height: 100%;
+        background-color: white;
+        display:flex;
+        flex-direction: column;
+      }
+      .tool{
+        width: 100%;
+        height: 20px;
+        color: #FF4433;
+        border: 1px solid #90A0AE;
+        margin-bottom: 2px;
+        font-size: 10px;
+      }
+      #tableDiv{
+        width: 75%;
+        height: 100%;
+        overflow: auto;
+      }
+      table{
+        width: 100%;
+        height: 100%;
+        font-size: 5px;
+        color: black;
       }
     </style>
-    `)
+    `);
+
+    // this.convertTable(data),
+
+    //define some sample data
+ 
+    //create Tabulator on DOM element with id "example-table"
+    
+var table = new table.Tabulator("#example-table", {
+  height:205, // set height of table (in CSS or here), this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
+  data:tabledata, //assign data to table
+  layout:"fitColumns", //fit columns to width of table (optional)
+  columns:[ //Define Table Columns
+    {title:"Name", field:"name", width:150},
+    {title:"Age", field:"age", hozAlign:"left", formatter:"progress"},
+    {title:"Favourite Color", field:"col"},
+    {title:"Date Of Birth", field:"dob", sorter:"date", hozAlign:"center"},
+  ],
+});
+//trigger an alert message when the row is clicked
+table.on("rowClick", function(e, row){ 
+ alert("Row " + row.getData().id + " Clicked!!!!");
+});
+
     //如果有需要的话,更新样式
     this.updateStyle();
   },
+
+  convertTable: function  (data) {
+    jsonData = data;
+		var i;
+		var jsonLength = !jsonData?0:jsonData.length;
+		var temp;
+		var tbl;
+		var td;
+		var body;
+		var tableDiv = document.getElementById("tableDiv");
+		
+		if (tableDiv.childElementCount>0) {
+			return;
+		}
+		
+		tbl = document.createElement("table");
+		tbl.border = "1px";
+		tbl.borderColor = "red";
+		for (i=0; i<1; i++) {
+			tr = document.createElement("tr");
+			for (temp in jsonData[i]) {
+				td = document.createElement("td");
+        td.setAttribute("width","8px");
+        td.setAttribute("height","4px");
+				td.appendChild(document.createTextNode(temp));
+				tr.appendChild(td);
+			}
+			if (i == jsonLength-1) {
+				tr.margin="0 0 5 0";
+			}
+			tbl.appendChild(tr);
+		}
+		for (i=0; i<jsonLength; i++) {
+			tr = document.createElement("tr");
+			for (temp in jsonData[i]) {
+				td = document.createElement("td");
+        td.setAttribute("width","8px");
+        td.setAttribute("height","4px");
+				td.appendChild(document.createTextNode(jsonData[i][temp]));
+				tr.appendChild(td);
+			}
+			if (i==jsonLength-1) {
+				tr.margin="0 0 5 0";
+			}
+			tbl.appendChild(tr);
+		}
+		tableDiv.appendChild(tbl);
+	},
+	
   /**
    *
    * @param width
