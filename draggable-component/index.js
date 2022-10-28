@@ -1,8 +1,9 @@
 var Event = require('bcore/event');
 var $ = require('jquery');
 var _ = require('lodash');
-var table = require('tabulator-tables');
-//var Chart = require('XXX');
+var Tabulator = require('tabulator-tables');
+// import {TabulatorFull as Tabulator} from 'tabulator-tables';
+
 
 /**
  * 马良基础类
@@ -40,14 +41,6 @@ module.exports = Event.extend(function Base(container, config) {
     data = this.data(data);
     var cfg = this.mergeConfig(config);
 
-    var tabledata = [
-      {id:1, name:"Oli Bob", age:"12", col:"red", dob:""},
-      {id:2, name:"Mary May", age:"1", col:"blue", dob:"14/05/1982"},
-      {id:3, name:"Christine Lobowski", age:"42", col:"green", dob:"22/05/1982"},
-      {id:4, name:"Brendon Philips", age:"125", col:"orange", dob:"01/08/1980"},
-      {id:5, name:"Margret Marmajuke", age:"16", col:"yellow", dob:"31/01/1999"},
-    ];
-
     console.log(data);
     //更新图表
     //this.chart.render(data, cfg);
@@ -60,7 +53,7 @@ module.exports = Event.extend(function Base(container, config) {
           <div class="tool box2">饼图</div>
           <div class="tool box3">柱状图</div>
         </div>
-        <div id="example-table"></div>
+        <div id="example-table" class="example-table"></div>
       </div>
 
     </div>
@@ -118,30 +111,59 @@ module.exports = Event.extend(function Base(container, config) {
         font-size: 5px;
         color: black;
       }
+      #example-table{
+        width: 80vw;
+        height: 50vh;
+        color: #111;
+      }
+      .tabulator {
+        position: relative;
+        border: 1px solid #222;
+        background-color: #fff;
+        font-size: 14px;
+        text-align: left;
+        overflow: hidden;
+        font-family: sans-serif;
+        -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        -o-transform: translateZ(0);
+        transform: translateZ(0);
+      }
     </style>
     `);
 
     // this.convertTable(data),
-
+    var tabledata = [
+      {id:1, name:"Oli Bob", age:"12", col:"red", dob:""},
+      {id:2, name:"Mary May", age:"1", col:"blue", dob:"14/05/1982"},
+      {id:3, name:"Christine Lobowski", age:"42", col:"green", dob:"22/05/1982"},
+      {id:4, name:"Brendon Philips", age:"125", col:"orange", dob:"01/08/1980"},
+      {id:5, name:"Margret Marmajuke", age:"16", col:"yellow", dob:"31/01/1999"},
+    ];
+    
     //define some sample data
- 
+    
     //create Tabulator on DOM element with id "example-table"
     
-var table = new table.Tabulator("#example-table", {
-  height:205, // set height of table (in CSS or here), this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
-  data:tabledata, //assign data to table
-  layout:"fitColumns", //fit columns to width of table (optional)
-  columns:[ //Define Table Columns
-    {title:"Name", field:"name", width:150},
-    {title:"Age", field:"age", hozAlign:"left", formatter:"progress"},
-    {title:"Favourite Color", field:"col"},
-    {title:"Date Of Birth", field:"dob", sorter:"date", hozAlign:"center"},
-  ],
-});
-//trigger an alert message when the row is clicked
-table.on("rowClick", function(e, row){ 
- alert("Row " + row.getData().id + " Clicked!!!!");
-});
+    var table = new Tabulator("#example-table", {
+      // height:205, // set height of table (in CSS or here), this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
+      data:tabledata, //assign data to table
+      layout:"fitDataStretch", //fit columns to width of table (optional)
+      columns:[ //Define Table Columns
+        {title:"Name", field:"name", width:150},
+        {title:"Age", field:"age", hozAlign:"left", formatter:"progress"},
+        {title:"Favourite Color", field:"col"},
+        {title:"Date Of Birth", field:"dob", sorter:"date", hozAlign:"center"},
+      ],
+    });
+
+    //trigger an alert message when the row is clicked
+    table.on("rowClick", function(e, row){ 
+      alert("Row " + row.getData().id + " Clicked!!!!");
+    });
+
+
 
     //如果有需要的话,更新样式
     this.updateStyle();
