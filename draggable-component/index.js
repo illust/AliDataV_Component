@@ -1,7 +1,20 @@
 var Event = require('bcore/event');
 var $ = require('jquery');
+// require('jquery-ui');
+// require('jquery-ui/ui/widgets/draggable');
+// require('jquery-ui/ui/widgets/droppable');
+
 var _ = require('lodash');
-var Tabulator = require('tabulator-tables');
+
+require('draggabilly')
+// var Tabulator = require('tabulator-tables');
+// import Vue from "vue";
+// import textComp from "./component";
+
+// import 'jquery-ui/ui/widgets/draggable';
+// import 'jquery-ui/ui/widgets/droppable';
+
+
 // import {TabulatorFull as Tabulator} from 'tabulator-tables';
 
 
@@ -43,19 +56,29 @@ module.exports = Event.extend(function Base(container, config) {
 
     console.log(data);
     //更新图表
-    //this.chart.render(data, cfg);
+    //this.chart.render(data, cfg);          <div id="example-table" class="example-table"></div>
     this.container.html(`
     <div class="container">
       <div class="header">业务人员自主分析平台</div>
       <div class="main">
-        <div class="toolbox">
-          <div class="tool box1">搜索框</div>
-          <div class="tool box2">饼图</div>
-          <div class="tool box3">柱状图</div>
-        </div>
-        <div id="example-table" class="example-table"></div>
+        <section class="left">
+          <div class="toolbox">
+            <div class="tool box1" id="b1" draggable="true">搜索框</div>
+            <div class="tool box2" id="b2" draggable="true">饼图</div>
+            <div class="tool box3" id="b3" draggable="true">柱状图</div>
+            <div class="tool box4" id="b4" draggable="true">折线图</div>
+            <div class="tool box5" id="b5" draggable="true">数据节点</div>
+          </div>
+        </section>
+        <section class="center">
+          <div class="content" id="cont" >
+          </div>
+        </section>
+        <section class="right">
+          <div class="props">
+          </div>
+        </section>
       </div>
-
     </div>
     <style>
       .container{
@@ -85,21 +108,50 @@ module.exports = Event.extend(function Base(container, config) {
         display: flex;
         flex-direction: row;
       }
+      .left{
+        width: 18%;
+        height: 100%;
+      }
       .toolbox{
-        width: 25%;
+        width: 100%;
         height: 100%;
         background-color: white;
         display:flex;
         flex-direction: column;
       }
+      .center{
+        width: 70%;
+        height: 100%;
+      }
+      .content{
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      .right{
+        width: 12%;
+        height: 100%;
+      }
+      .props{
+        width: 100%;
+        height: 100%;
+        background-color: white;
+      }
       .tool{
         width: 100%;
-        height: 20px;
+        height: 25px;
         color: #FF4433;
         border: 1px solid #90A0AE;
+        text-align: center;
+        line-height: 25px;
         margin-bottom: 2px;
         font-size: 10px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bolder;
       }
+
+
+
       #tableDiv{
         width: 75%;
         height: 100%;
@@ -132,90 +184,105 @@ module.exports = Event.extend(function Base(container, config) {
       }
     </style>
     `);
+    console.log(this.container);
+    this.container.find('.tool').on('dragstart',
+      (event)=>{
+        console.log("target",event.target);
+        event.originalEvent.dataTransfer.setData("text",event.target.id);
+      }
+    )
+    $.when( $.ready ).then(function(){
+      if(document.getElementById('cont').hasChildNodes){
+        var nd = document.getElementById('cont');
+        console.log("nd.childNodes",nd.childNodes);
+      }
+      })
+  
+    // $.ready(()=>{
+    //   document.getElementById('cont').childNodes.forEach(
+    //     (e)=>{
+    //       var atr=document.createAttribute("style");
+    //       atr.nodeValue="position:absolute;";
+    //       e.setA
+    //     }
+    //   )
+    // })
+    this.container.find('.content').on('drop',
+      (event)=>{
+        event.preventDefault();
 
-    // this.convertTable(data),
-    var tabledata = [
-      {id:1, name:"Oli Bob", age:"12", col:"red", dob:""},
-      {id:2, name:"Mary May", age:"1", col:"blue", dob:"14/05/1982"},
-      {id:3, name:"Christine Lobowski", age:"42", col:"green", dob:"22/05/1982"},
-      {id:4, name:"Brendon Philips", age:"125", col:"orange", dob:"01/08/1980"},
-      {id:5, name:"Margret Marmajuke", age:"16", col:"yellow", dob:"31/01/1999"},
-    ];
-    
-    //define some sample data
-    
-    //create Tabulator on DOM element with id "example-table"
-    
-    var table = new Tabulator("#example-table", {
-      // height:205, // set height of table (in CSS or here), this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
-      data:tabledata, //assign data to table
-      layout:"fitDataStretch", //fit columns to width of table (optional)
-      columns:[ //Define Table Columns
-        {title:"Name", field:"name", width:150},
-        {title:"Age", field:"age", hozAlign:"left", formatter:"progress"},
-        {title:"Favourite Color", field:"col"},
-        {title:"Date Of Birth", field:"dob", sorter:"date", hozAlign:"center"},
-      ],
-    });
-
-    //trigger an alert message when the row is clicked
-    table.on("rowClick", function(e, row){ 
-      alert("Row " + row.getData().id + " Clicked!!!!");
-    });
+        event.stopPropagation();
+        var data = event.originalEvent.dataTransfer.getData("text");
+        console.log("data",data);
+        var dataClone = document.getElementById(data).cloneNode(true);
 
 
+
+        event.target.appendChild(dataClone);
+      }
+    )
+    this.container.find('.content').on('dragover',
+      (event)=>{
+        event.preventDefault();
+      }
+    )
 
     //如果有需要的话,更新样式
     this.updateStyle();
   },
 
-  convertTable: function  (data) {
-    jsonData = data;
-		var i;
-		var jsonLength = !jsonData?0:jsonData.length;
-		var temp;
-		var tbl;
-		var td;
-		var body;
-		var tableDiv = document.getElementById("tableDiv");
+  dragHandler: function(event){
+    console.log("event",event);
+    event.originalEvent.dataTransfer.setData("text", event.target.id);
+  },
+
+  // convertTable: function (data) {
+  //   jsonData = data;
+	// 	var i;
+	// 	var jsonLength = !jsonData?0:jsonData.length;
+	// 	var temp;
+	// 	var tbl;
+	// 	var td;
+	// 	var body;
+	// 	var tableDiv = document.getElementById("tableDiv");
 		
-		if (tableDiv.childElementCount>0) {
-			return;
-		}
+	// 	if (tableDiv.childElementCount>0) {
+	// 		return;
+	// 	}
 		
-		tbl = document.createElement("table");
-		tbl.border = "1px";
-		tbl.borderColor = "red";
-		for (i=0; i<1; i++) {
-			tr = document.createElement("tr");
-			for (temp in jsonData[i]) {
-				td = document.createElement("td");
-        td.setAttribute("width","8px");
-        td.setAttribute("height","4px");
-				td.appendChild(document.createTextNode(temp));
-				tr.appendChild(td);
-			}
-			if (i == jsonLength-1) {
-				tr.margin="0 0 5 0";
-			}
-			tbl.appendChild(tr);
-		}
-		for (i=0; i<jsonLength; i++) {
-			tr = document.createElement("tr");
-			for (temp in jsonData[i]) {
-				td = document.createElement("td");
-        td.setAttribute("width","8px");
-        td.setAttribute("height","4px");
-				td.appendChild(document.createTextNode(jsonData[i][temp]));
-				tr.appendChild(td);
-			}
-			if (i==jsonLength-1) {
-				tr.margin="0 0 5 0";
-			}
-			tbl.appendChild(tr);
-		}
-		tableDiv.appendChild(tbl);
-	},
+	// 	tbl = document.createElement("table");
+	// 	tbl.border = "1px";
+	// 	tbl.borderColor = "red";
+	// 	for (i=0; i<1; i++) {
+	// 		tr = document.createElement("tr");
+	// 		for (temp in jsonData[i]) {
+	// 			td = document.createElement("td");
+  //       td.setAttribute("width","8px");
+  //       td.setAttribute("height","4px");
+	// 			td.appendChild(document.createTextNode(temp));
+	// 			tr.appendChild(td);
+	// 		}
+	// 		if (i == jsonLength-1) {
+	// 			tr.margin="0 0 5 0";
+	// 		}
+	// 		tbl.appendChild(tr);
+	// 	}
+	// 	for (i=0; i<jsonLength; i++) {
+	// 		tr = document.createElement("tr");
+	// 		for (temp in jsonData[i]) {
+	// 			td = document.createElement("td");
+  //       td.setAttribute("width","8px");
+  //       td.setAttribute("height","4px");
+	// 			td.appendChild(document.createTextNode(jsonData[i][temp]));
+	// 			tr.appendChild(td);
+	// 		}
+	// 		if (i==jsonLength-1) {
+	// 			tr.margin="0 0 5 0";
+	// 		}
+	// 		tbl.appendChild(tr);
+	// 	}
+	// 	tableDiv.appendChild(tbl);
+	// },
 	
   /**
    *

@@ -1,0 +1,101 @@
+<div id="container">
+    <div class="header">业务人员自主分析平台</div>
+    <div class="main">
+      <section class="left">
+        <div class="toolbox">
+          <div class="tool box1" draggable="true" ondragstart="drag(event)">搜索框</div>
+          <div class="tool box2" draggable="true" ondragstart="drag(event)">饼图</div>
+          <div class="tool box3" draggable="true" ondragstart="drag(event)">柱状图</div>
+        </div>
+      </section>
+      <section class="center">
+        <div class="content" ondrop="drop(event)" ondragover="allowDrop(event)">
+        </div>
+      </section>
+    </div>
+  </div>
+  <script>
+
+  </script>
+  <style>
+    #container{
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      overflow: hidden;
+      background: #f4f3f4;
+      width: 100%;
+      height: 100%;
+    }
+    .header{
+      width: 100%;
+      height: 60px;
+      color: green;
+      font-size: 30px;
+      font-weight: 100;
+      text-align: center;
+      background-color: white;
+      position: positive;
+      border-bottom: 1px solid #f4f3f4;
+    }
+    .main{
+      width: 100%;
+      height: 540px;
+      position: positive;
+      display: flex;
+      flex-direction: row;
+    }
+    .left{
+      width: 25%;
+      height: 100%;
+    }
+    .toolbox{
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      display:flex;
+      flex-direction: column;
+    }
+    .center{
+      width: 75%;
+      height: 100%;
+    }
+    .tool{
+      width: 100%;
+      height: 20px;
+      color: #FF4433;
+      border: 1px solid #90A0AE;
+      margin-bottom: 2px;
+      font-size: 10px;
+    }
+    #tableDiv{
+      width: 75%;
+      height: 100%;
+      overflow: auto;
+    }
+    table{
+      width: 100%;
+      height: 100%;
+      font-size: 5px;
+      color: black;
+    }
+    #example-table{
+      width: 80vw;
+      height: 50vh;
+      color: #111;
+    }
+    .tabulator {
+      position: relative;
+      border: 1px solid #222;
+      background-color: #fff;
+      font-size: 14px;
+      text-align: left;
+      overflow: hidden;
+      font-family: sans-serif;
+      -webkit-transform: translateZ(0);
+      -moz-transform: translateZ(0);
+      -ms-transform: translateZ(0);
+      -o-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+  </style>
