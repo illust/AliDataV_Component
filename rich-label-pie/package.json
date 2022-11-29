@@ -1,6 +1,6 @@
 {
   "name": "@sven.wong/rich-label-pie",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "dependencies": {
     "bcore": "0.0.18",
     "jquery": "2.1.4",
@@ -821,7 +821,7 @@
     "api_data": {
       "source": [
         {
-          "value": 62.2,
+          "value": 82000.2,
           "name": "Baidu"
         },
         {
@@ -833,16 +833,80 @@
           "name": "Email"
         },
         {
-          "value": 121655.8,
+          "value": 21655.8,
           "name": "Google"
         },
         {
-          "value": 122268.7,
+          "value": 22268.7,
           "name": "Union Ads"
         },
         {
-          "value": 7915326.3,
+          "value": 15326.3,
           "name": "Bing"
+        },
+        {
+          "value": 15326.3,
+          "name": "ABC"
+        },
+        {
+          "value": 8521.6,
+          "name": "BBC"
+        },
+        {
+          "value": 44252,
+          "name": "CBC"
+        },
+        {
+          "value": 98500,
+          "name": "DBC"
+        },
+        {
+          "value": 12011.8,
+          "name": "EBC"
+        },
+        {
+          "value": 46513,
+          "name": "FBC"
+        },
+        {
+          "value": 3218.8,
+          "name": "GBC"
+        },
+        {
+          "value": 65660,
+          "name": "HBC"
+        },
+        {
+          "value": 44545,
+          "name": "IBC"
+        },
+        {
+          "value": 7520.3,
+          "name": "JBC"
+        },
+        {
+          "value": 99020.3,
+          "name": "KBC"
+        },
+        {
+          "value": 89884,
+          "name": "LBC"
+        },
+        {
+          "value": 23326,
+          "name": "MBC"
+        },
+        {
+          "value": 991532,
+          "name": "NBC"
+        },
+        {
+          "value": 99565,
+          "name": "OBC"
+        },
+        {
+          "value": 65444,
+          "name": "PBC"
         }
       ]
     }

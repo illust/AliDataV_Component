@@ -1,12 +1,7 @@
 var Event = require('bcore/event');
 var $ = require('jquery');
-// require('jquery-ui');
-// require('jquery-ui/ui/widgets/draggable');
-// require('jquery-ui/ui/widgets/droppable');
-
 var _ = require('lodash');
 
-require('draggabilly')
 // var Tabulator = require('tabulator-tables');
 // import Vue from "vue";
 // import textComp from "./component";
@@ -59,7 +54,7 @@ module.exports = Event.extend(function Base(container, config) {
     //this.chart.render(data, cfg);          <div id="example-table" class="example-table"></div>
     this.container.html(`
     <div class="container">
-      <div class="header">业务人员自主分析平台</div>
+      <div class="header">业务人员自主分析平台（清空画布）</div>
       <div class="main">
         <section class="left">
           <div class="toolbox">
@@ -99,7 +94,12 @@ module.exports = Event.extend(function Base(container, config) {
         text-align: center;
         background-color: white;
         position: positive;
+        line-height: 60px;
         border-bottom: 1px solid #f4f3f4;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
       }
       .main{
         width: 100%;
@@ -138,7 +138,7 @@ module.exports = Event.extend(function Base(container, config) {
         background-color: white;
       }
       .tool{
-        width: 100%;
+        width: 145px;
         height: 25px;
         color: #FF4433;
         border: 1px solid #90A0AE;
@@ -148,9 +148,17 @@ module.exports = Event.extend(function Base(container, config) {
         font-size: 10px;
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bolder;
+        background-color: #26ffdf;
       }
 
+      .tool:hover{
+        cursor: grab;
+        filter: brightness(90%);
+      }
 
+      .item:active {
+        cursor: grabbing;
+      }
 
       #tableDiv{
         width: 75%;
@@ -185,7 +193,10 @@ module.exports = Event.extend(function Base(container, config) {
     </style>
     `);
     console.log(this.container);
-    this.container.find('.tool').on('dragstart',
+    this.container.find('.header').on('click',function(){
+      document.getElementById('cont').removeChild(document.getElementById('cont').childNodes[0]);
+    })
+    this.container.find('.toolbox').find('.tool').on('dragstart',
       (event)=>{
         console.log("target",event.target);
         event.originalEvent.dataTransfer.setData("text",event.target.id);
@@ -198,15 +209,6 @@ module.exports = Event.extend(function Base(container, config) {
       }
       })
   
-    // $.ready(()=>{
-    //   document.getElementById('cont').childNodes.forEach(
-    //     (e)=>{
-    //       var atr=document.createAttribute("style");
-    //       atr.nodeValue="position:absolute;";
-    //       e.setA
-    //     }
-    //   )
-    // })
     this.container.find('.content').on('drop',
       (event)=>{
         event.preventDefault();
@@ -216,16 +218,40 @@ module.exports = Event.extend(function Base(container, config) {
         console.log("data",data);
         var dataClone = document.getElementById(data).cloneNode(true);
 
+        var nd = document.createAttribute("style");
+        nd.nodeValue = "position:absolute;top:"+event.originalEvent.pageY+"px;left:"+event.originalEvent.pageX+"px;"
 
-
+        dataClone.setAttributeNode(nd);
+ 
         event.target.appendChild(dataClone);
+        console.log("xy",event.originalEvent.pageX,event.originalEvent.pageY);
       }
     )
-    this.container.find('.content').on('dragover',
-      (event)=>{
+    this.container.find('.content').on('dragover',(event)=>{
         event.preventDefault();
       }
     )
+
+    this.container.find('.content').find('.tool').on('mousedown',(event)=>{
+      event.preventDefault();
+      event.stopPropagation();
+      document.addEventListener('mousemove',()=>{
+        console.log("this");
+      })
+      console.log("this",this);
+    })
+
+    this.container.find('.content').find('.tool').on('mousemove',(event)=>{
+      event.preventDefault();
+      event.stopPropagation();
+      console.log("this",this);
+    })
+
+    // this.container.find('.content').on('mousemove',function(event){
+    //   console.log("width&height: (",document.getElementById('cont').offsetWidth,",",document.getElementById('cont').offsetHeight,")");
+    //   console.log("offset width&height: (",document.getElementById('cont').offsetLeft,",",document.getElementById('cont').offsetTop,")");
+    //   console.log("(",event.originalEvent.pageX,",",event.originalEvent.pageY,")");
+    // })
 
     //如果有需要的话,更新样式
     this.updateStyle();

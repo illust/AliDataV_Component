@@ -112,6 +112,8 @@ module.exports = Event.extend(function Base(container, config) {
         {
           name: 'Access From',
           type: 'pie',
+          minAngle: 15,
+          avoidLabelOverlap: true,
           radius: [cfg.options.chart.radius.inRadius, cfg.options.chart.radius.outRadius],
           labelLine: {
             length: cfg.options.chart.label.turnLength,

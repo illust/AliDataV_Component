@@ -1,9 +1,8 @@
 {
   "name": "@sven.wong/draggable-component",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "dependencies": {
     "bcore": "0.0.18",
-    "draggabilly": "^3.0.0",
     "jquery": "2.1.4",
     "jquery-ui": "^1.13.2",
     "lodash": "4.6.1",
@@ -18,8 +17,8 @@
       "regular"
     ],
     "view": {
-      "width": 1000,
-      "height": 622,
+      "width": 800,
+      "height": 580,
       "minWidth": "200",
       "minHeight": "100"
     },
