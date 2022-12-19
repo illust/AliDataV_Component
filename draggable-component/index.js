@@ -1,6 +1,7 @@
 var Event = require('bcore/event');
 var $ = require('jquery');
 var _ = require('lodash');
+var Echarts = require('echarts');  // through require('echarts') in AMD environment.
 
 // var Tabulator = require('tabulator-tables');
 // import Vue from "vue";
@@ -55,7 +56,7 @@ module.exports = Event.extend(function Base(container, config) {
     this.container.html(`
     <div class="container">
       <div class="header">业务人员自主分析平台（清空画布）</div>
-      <div class="main">
+      <div class="main" id=""main-content">
         <section class="left">
           <div class="toolbox">
             <div class="tool box1" id="b1" draggable="true">搜索框</div>
@@ -253,6 +254,33 @@ module.exports = Event.extend(function Base(container, config) {
     //   console.log("(",event.originalEvent.pageX,",",event.originalEvent.pageY,")");
     // })
 
+    option = {
+      xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          data: [150, 230, 224, 218, 135, 147, 260],
+          type: 'line'
+        }
+      ]
+    };
+    echartOpt();
+
+    
+     function echartOpt(){
+      var chartDom = document.getElementById('b1');
+      var myChart = Echarts.init(chartDom);
+      myChart.setOption(option);
+    }
+
+    console.log("this.container.find",this.container.find(".content")[0]);
+    this.container.find(".content")[0].addEventListener("mousedown",echartOpt);
+
     //如果有需要的话,更新样式
     this.updateStyle();
   },
@@ -262,53 +290,6 @@ module.exports = Event.extend(function Base(container, config) {
     event.originalEvent.dataTransfer.setData("text", event.target.id);
   },
 
-  // convertTable: function (data) {
-  //   jsonData = data;
-	// 	var i;
-	// 	var jsonLength = !jsonData?0:jsonData.length;
-	// 	var temp;
-	// 	var tbl;
-	// 	var td;
-	// 	var body;
-	// 	var tableDiv = document.getElementById("tableDiv");
-		
-	// 	if (tableDiv.childElementCount>0) {
-	// 		return;
-	// 	}
-		
-	// 	tbl = document.createElement("table");
-	// 	tbl.border = "1px";
-	// 	tbl.borderColor = "red";
-	// 	for (i=0; i<1; i++) {
-	// 		tr = document.createElement("tr");
-	// 		for (temp in jsonData[i]) {
-	// 			td = document.createElement("td");
-  //       td.setAttribute("width","8px");
-  //       td.setAttribute("height","4px");
-	// 			td.appendChild(document.createTextNode(temp));
-	// 			tr.appendChild(td);
-	// 		}
-	// 		if (i == jsonLength-1) {
-	// 			tr.margin="0 0 5 0";
-	// 		}
-	// 		tbl.appendChild(tr);
-	// 	}
-	// 	for (i=0; i<jsonLength; i++) {
-	// 		tr = document.createElement("tr");
-	// 		for (temp in jsonData[i]) {
-	// 			td = document.createElement("td");
-  //       td.setAttribute("width","8px");
-  //       td.setAttribute("height","4px");
-	// 			td.appendChild(document.createTextNode(jsonData[i][temp]));
-	// 			tr.appendChild(td);
-	// 		}
-	// 		if (i==jsonLength-1) {
-	// 			tr.margin="0 0 5 0";
-	// 		}
-	// 		tbl.appendChild(tr);
-	// 	}
-	// 	tableDiv.appendChild(tbl);
-	// },
 	
   /**
    *
