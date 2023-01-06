@@ -6,11 +6,6 @@ var Echarts = require('echarts');  // through require('echarts') in AMD environm
 // var Tabulator = require('tabulator-tables');
 // import Vue from "vue";
 // import textComp from "./component";
-
-// import 'jquery-ui/ui/widgets/draggable';
-// import 'jquery-ui/ui/widgets/droppable';
-
-
 // import {TabulatorFull as Tabulator} from 'tabulator-tables';
 
 
@@ -55,7 +50,7 @@ module.exports = Event.extend(function Base(container, config) {
     //this.chart.render(data, cfg);          <div id="example-table" class="example-table"></div>
     this.container.html(`
     <div class="container">
-      <div class="header">业务人员自主分析平台（清空画布）</div>
+      <div class="header">业务人员自主分析平台</div>
       <div class="main" id=""main-content">
         <section class="left">
           <div class="toolbox">
@@ -64,6 +59,7 @@ module.exports = Event.extend(function Base(container, config) {
             <div class="tool box3" id="b3" draggable="true">柱状图</div>
             <div class="tool box4" id="b4" draggable="true">折线图</div>
             <div class="tool box5" id="b5" draggable="true">数据节点</div>
+            <div class="tool box6" id="b6" draggable="true">计算节点</div>
           </div>
         </section>
         <section class="center">
@@ -125,7 +121,7 @@ module.exports = Event.extend(function Base(container, config) {
         height: 100%;
       }
       .content{
-        position: relative;
+        position: positive;
         width: 100%;
         height: 100%;
       }
@@ -139,6 +135,20 @@ module.exports = Event.extend(function Base(container, config) {
         background-color: white;
       }
       .tool{
+        width: 145px;
+        height: 25px;
+        color: #FF4433;
+        border: 1px solid #90A0AE;
+        text-align: center;
+        line-height: 25px;
+        margin-bottom: 2px;
+        font-size: 10px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bolder;
+        background-color: #26ffdf;
+      }
+
+      .box6{
         width: 145px;
         height: 25px;
         color: #FF4433;
@@ -193,14 +203,19 @@ module.exports = Event.extend(function Base(container, config) {
       }
     </style>
     `);
-    console.log(this.container);
+
+    // clear canvas 
     this.container.find('.header').on('click',function(){
       document.getElementById('cont').removeChild(document.getElementById('cont').childNodes[0]);
     })
+
+
+    // 原生drag&drop实现拖拽
     this.container.find('.toolbox').find('.tool').on('dragstart',
       (event)=>{
         console.log("target",event.target);
         event.originalEvent.dataTransfer.setData("text",event.target.id);
+        event.originalEvent.dataTransfer.effectAllowed = "copy";
       }
     )
     $.when( $.ready ).then(function(){
@@ -210,9 +225,19 @@ module.exports = Event.extend(function Base(container, config) {
       }
       })
   
+    this.container.find('.content').on('dragover',(event)=>{
+      event.preventDefault();
+      event.stopPropagation();
+      event.originalEvent.dataTransfer.dropEffect = "copy";
+      })
+
     this.container.find('.content').on('drop',
       (event)=>{
         event.preventDefault();
+        
+        // const data = event.originalEvent.dataTransfer.getData("text");
+        // console.log("data",data);
+        // event.target.appendChild(document.getElementById(data));
 
         event.stopPropagation();
         var data = event.originalEvent.dataTransfer.getData("text");
@@ -220,39 +245,24 @@ module.exports = Event.extend(function Base(container, config) {
         var dataClone = document.getElementById(data).cloneNode(true);
 
         var nd = document.createAttribute("style");
-        nd.nodeValue = "position:absolute;top:"+event.originalEvent.pageY+"px;left:"+event.originalEvent.pageX+"px;"
-
+        nd.nodeValue = "position:absolute;top:"+(event.originalEvent.pageY-this.container[0].getBoundingClientRect().top)+"px;left:"+(event.originalEvent.pageX-this.container[0].getBoundingClientRect().left)+"px;"
         dataClone.setAttributeNode(nd);
  
         event.target.appendChild(dataClone);
         console.log("xy",event.originalEvent.pageX,event.originalEvent.pageY);
       }
     )
-    this.container.find('.content').on('dragover',(event)=>{
-        event.preventDefault();
-      }
-    )
 
-    this.container.find('.content').find('.tool').on('mousedown',(event)=>{
-      event.preventDefault();
-      event.stopPropagation();
-      document.addEventListener('mousemove',()=>{
-        console.log("this");
-      })
-      console.log("this",this);
-    })
-
-    this.container.find('.content').find('.tool').on('mousemove',(event)=>{
-      event.preventDefault();
-      event.stopPropagation();
-      console.log("this",this);
-    })
-
-    // this.container.find('.content').on('mousemove',function(event){
-    //   console.log("width&height: (",document.getElementById('cont').offsetWidth,",",document.getElementById('cont').offsetHeight,")");
-    //   console.log("offset width&height: (",document.getElementById('cont').offsetLeft,",",document.getElementById('cont').offsetTop,")");
-    //   console.log("(",event.originalEvent.pageX,",",event.originalEvent.pageY,")");
+    // $(document).on("mousemove",(event)=>{
+    //   console.log("origin xy",event.originalEvent.pageX,event.originalEvent.pageY);
+    //   console.log("left top",this.container.find('.content')[0].getBoundingClientRect().left,this.container.find('.content')[0].getBoundingClientRect().top);
+    //   console.log("datav left top",this.container[0].getBoundingClientRect().left,this.container[0].getBoundingClientRect().top);
     // })
+
+  this.container.find(".content").on("dragstart",(event)=>{
+    event.originalEvent.dataTransfer.setData("text",event.target.id);
+    event.originalEvent.dataTransfer.effectAllowed = "all";
+  })
 
     option = {
       xAxis: {

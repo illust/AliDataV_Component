@@ -6,6 +6,7 @@
     "echarts": "^5.0.0",
     "jquery": "2.1.4",
     "jquery-ui": "^1.13.2",
+    "jquery-ui-dist": "^1.13.2",
     "lodash": "^4.17.21",
     "tabulator-tables": "^5.4.2",
     "vue": "^2.7.13"
