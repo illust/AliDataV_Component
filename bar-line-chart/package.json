@@ -1,0 +1,1163 @@
+{
+  "name": "@sven.wong/bar-line-chart",
+  "version": "0.0.1",
+  "dependencies": {
+    "bcore": "0.0.18",
+    "jquery": "2.1.4",
+    "lodash": "4.6.1",
+    "echarts": "5.0.0"
+  },
+  "datav": {
+    "cn_name": "折线柱状图v2",
+    "icon": "",
+    "protocol": 2,
+    "type": [
+      "regular"
+    ],
+    "view": {
+      "width": "600",
+      "height": "500",
+      "minWidth": "200",
+      "minHeight": "100"
+    },
+    "apis": {
+      "source": {
+        "handler": "render",
+        "description": "接口描述",
+        "fields": {
+          "value": {
+            "description": "值说明"
+          }
+        }
+      }
+    },
+    "config": {
+      "options": {
+        "type": "menu",
+        "children": {
+          "chart": {
+            "name": "图表",
+            "type": "menuChild",
+            "mode": "single",
+            "children": {
+              "margin": {
+                "type": "margin",
+                "name": "图形外边距",
+                "default": {
+                  "top": 12,
+                  "bottom": 3,
+                  "left": 3,
+                  "right": 1
+                }
+              },
+              "title": {
+                "name": "标题",
+                "type": "group",
+                "children": {
+                  "show": {
+                    "name": "显示/隐藏",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "content": {
+                    "name": "文本内容",
+                    "type": "text",
+                    "default": ""
+                  },
+                  "textStyle": {
+                    "type": "font",
+                    "name": "文本样式",
+                    "default": {
+                      "fontFamily": "Microsoft Yahei",
+                      "fontWeight": "normal",
+                      "fontSize": 20,
+                      "color": "#fff"
+                    }
+                  }
+                },
+                "enableHide": true
+              },
+              "numericalLabel": {
+                "name": "图例",
+                "type": "group",
+                "children": {
+                  "show": {
+                    "name": "显示/隐藏",
+                    "type": "boolean",
+                    "default": true
+                  },
+                  "textStyle": {
+                    "type": "font",
+                    "name": "文本",
+                    "default": {
+                      "fontFamily": "Microsoft Yahei",
+                      "fontWeight": "bold",
+                      "fontSize": 15,
+                      "color": "#ffffff"
+                    }
+                  },
+                  "pos": {
+                    "name": "位置",
+                    "type": "group",
+                    "children": {
+                      "horizontal": {
+                        "name": "水平",
+                        "type": "select",
+                        "default": "right",
+                        "options": [
+                          {
+                            "value": "left",
+                            "label": "居左"
+                          },
+                          {
+                            "value": "center",
+                            "label": "居中"
+                          },
+                          {
+                            "value": "right",
+                            "label": "居右"
+                          }
+                        ]
+                      },
+                      "vertical": {
+                        "name": "垂直",
+                        "type": "select",
+                        "default": "top",
+                        "options": [
+                          {
+                            "value": "top",
+                            "label": "居顶"
+                          },
+                          {
+                            "value": "center",
+                            "label": "居中"
+                          },
+                          {
+                            "value": "bottom",
+                            "label": "居底"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "direction": {
+                    "name": "方向",
+                    "type": "select",
+                    "default": "horizontal",
+                    "options": [
+                      {
+                        "value": "horizontal",
+                        "label": "水平"
+                      },
+                      {
+                        "value": "vertical",
+                        "label": "垂直"
+                      }
+                    ]
+                  }
+                },
+                "enableHide": true
+              }
+            }
+          },
+          "axis": {
+            "name": "坐标轴",
+            "type": "menuChild",
+            "mode": "multiple",
+            "children": {
+              "xaxis": {
+                "name": "x轴",
+                "children": {
+                  "isShow": {
+                    "type": "switch",
+                    "name": "x轴可见",
+                    "default": false
+                  },
+                  "label": {
+                    "name": "轴标签",
+                    "type": "group",
+                    "enableHide": true,
+                    "children": {
+                      "show": {
+                        "default": true
+                      },
+                      "format": {
+                        "name": "显示格式",
+                        "type": "select",
+                        "default": "%m月",
+                        "description": "时间请参照 %m/%d/%Y %H:%M:%S, 整数参照 d, 浮点参照 .1f",
+                        "options": [
+                          {
+                            "value": "d",
+                            "label": "11(整数)"
+                          },
+                          {
+                            "value": ".1f",
+                            "label": "11.1(浮点数)"
+                          },
+                          {
+                            "value": ".2f",
+                            "label": "11.11(浮点数)"
+                          },
+                          {
+                            "value": "%Y年",
+                            "label": "2016年"
+                          },
+                          {
+                            "value": "%Y",
+                            "label": "2016(年份)"
+                          },
+                          {
+                            "value": "%m月%d日",
+                            "label": "01月01日"
+                          },
+                          {
+                            "value": "%m/%d",
+                            "label": "01/01(月/日)"
+                          },
+                          {
+                            "value": "%H:%M:%S",
+                            "label": "02:30:00"
+                          },
+                          {
+                            "value": "%H:%M",
+                            "label": "02:30(时:分)"
+                          },
+                          {
+                            "value": "%Y/%m/%d %H:%M",
+                            "label": "2016/01/01 02:30"
+                          },
+                          {
+                            "value": "%Y/%m/%d",
+                            "label": "2016/01/01"
+                          },
+                          {
+                            "value": "%m/%d %H:%M",
+                            "label": "01/01 02:30"
+                          },
+                          {
+                            "value": "%m月",
+                            "label": "1月"
+                          },
+                          {
+                            "value": "%d日",
+                            "label": "2日"
+                          },
+                          {
+                            "value": "%Hh",
+                            "label": "02h"
+                          },
+                          {
+                            "value": "%H",
+                            "label": "02(时)"
+                          },
+                          {
+                            "value": "%m-%d",
+                            "label": "01-01"
+                          },
+                          {
+                            "value": "%m.%d",
+                            "label": "01.01"
+                          }
+                        ],
+                        "filterable": true,
+                        "allowCustom": true,
+                        "showInPanel": {
+                          "conditions": [
+                            [
+                              "..type",
+                              "$ne",
+                              "category"
+                            ]
+                          ]
+                        }
+                      },
+                      "textarea": {
+                        "type": "font",
+                        "name": "文本",
+                        "default": {
+                          "fontFamily": "Microsoft Yahei",
+                          "fontWeight": "normal",
+                          "fontSize": 12,
+                          "color": "rgb(144, 160, 174)"
+                        }
+                      },
+                      "textNum": {
+                        "type": "stepper",
+                        "name": "文字数量",
+                        "step": 1,
+                        "default": 4,
+                        "min": 1,
+                        "max": 10
+                      },
+                      "textMargin": {
+                        "type": "stepper",
+                        "name": "文字距离",
+                        "default": 5,
+                        "min": 0,
+                        "max": 50,
+                        "stepper": 1
+                      }
+                    },
+                    "showInPanel": {
+                      "conditions": [
+                        [
+                          ".isShow",
+                          "$eq",
+                          true
+                        ]
+                      ]
+                    }
+                  },
+                  "axisLine": {
+                    "name": "轴线",
+                    "type": "group",
+                    "children": {
+                      "show": {
+                        "default": true
+                      },
+                      "color": {
+                        "type": "fill",
+                        "name": "颜色",
+                        "default": "rgba(255, 255, 255, 0.1)"
+                      },
+                      "width": {
+                        "type": "stepper",
+                        "name": "宽度",
+                        "step": 1,
+                        "min": 0,
+                        "max": 15,
+                        "default": 2
+                      }
+                    },
+                    "enableHide": true,
+                    "showInPanel": {
+                      "conditions": [
+                        [
+                          ".isShow",
+                          "$eq",
+                          true
+                        ]
+                      ]
+                    }
+                  },
+                  "grid": {
+                    "name": "网格线",
+                    "type": "group",
+                    "children": {
+                      "show": {
+                        "default": false
+                      },
+                      "color": {
+                        "type": "fill",
+                        "name": "颜色",
+                        "default": "#fff"
+                      }
+                    },
+                    "enableHide": true,
+                    "showInPanel": {
+                      "conditions": [
+                        [
+                          ".isShow",
+                          "$eq",
+                          true
+                        ]
+                      ]
+                    }
+                  }
+                },
+                "enableHide": true
+              },
+              "yaxis": {
+                "name": "y轴",
+                "children": {
+                  "isShow": {
+                    "type": "switch",
+                    "name": "y轴可见",
+                    "default": false
+                  },
+                  "yname": {
+                    "name": "y轴名称",
+                    "type": "group",
+                    "children": {
+                      "name": {
+                        "type": "text",
+                        "name": "名称",
+                        "default": "y轴"
+                      },
+                      "nameLocation": {
+                        "type": "select",
+                        "name": "名称位置",
+                        "default": "end",
+                        "options": [
+                          {
+                            "value": "start",
+                            "label": "起始"
+                          },
+                          {
+                            "value": "center",
+                            "label": "中间"
+                          },
+                          {
+                            "value": "end",
+                            "label": "末尾"
+                          }
+                        ]
+                      },
+                      "padding": {
+                        "type": "padding",
+                        "name": "名称内边距",
+                        "default": {
+                          "top": 2,
+                          "bottom": 3,
+                          "left": 3,
+                          "right": 1
+                        }
+                      },
+                      "nameGap": {
+                        "name": "标题距离",
+                        "type": "stepper",
+                        "step": 1,
+                        "min": 0,
+                        "max": 30,
+                        "default": 15
+                      },
+                      "textStyle": {
+                        "type": "font",
+                        "name": "文本格式",
+                        "default": {
+                          "fontFamily": "Microsoft Yahei",
+                          "fontWeight": "normal",
+                          "fontSize": 12,
+                          "color": "rgb(144, 160, 174)"
+                        }
+                      }
+                    }
+                  },
+                  "label": {
+                    "name": "轴标签",
+                    "type": "group",
+                    "enableHide": true,
+                    "children": {
+                      "show": {
+                        "default": true
+                      },
+                      "format": {
+                        "name": "显示格式",
+                        "type": "select",
+                        "default": "%m月",
+                        "description": "时间请参照 %m/%d/%Y %H:%M:%S, 整数参照 d, 浮点参照 .1f",
+                        "options": [
+                          {
+                            "value": "d",
+                            "label": "11(整数)"
+                          },
+                          {
+                            "value": ".1f",
+                            "label": "11.1(浮点数)"
+                          },
+                          {
+                            "value": ".2f",
+                            "label": "11.11(浮点数)"
+                          },
+                          {
+                            "value": "%Y年",
+                            "label": "2016年"
+                          },
+                          {
+                            "value": "%Y",
+                            "label": "2016(年份)"
+                          },
+                          {
+                            "value": "%m月%d日",
+                            "label": "01月01日"
+                          },
+                          {
+                            "value": "%m/%d",
+                            "label": "01/01(月/日)"
+                          },
+                          {
+                            "value": "%H:%M:%S",
+                            "label": "02:30:00"
+                          },
+                          {
+                            "value": "%H:%M",
+                            "label": "02:30(时:分)"
+                          },
+                          {
+                            "value": "%Y/%m/%d %H:%M",
+                            "label": "2016/01/01 02:30"
+                          },
+                          {
+                            "value": "%Y/%m/%d",
+                            "label": "2016/01/01"
+                          },
+                          {
+                            "value": "%m/%d %H:%M",
+                            "label": "01/01 02:30"
+                          },
+                          {
+                            "value": "%m月",
+                            "label": "1月"
+                          },
+                          {
+                            "value": "%d日",
+                            "label": "2日"
+                          },
+                          {
+                            "value": "%Hh",
+                            "label": "02h"
+                          },
+                          {
+                            "value": "%H",
+                            "label": "02(时)"
+                          },
+                          {
+                            "value": "%m-%d",
+                            "label": "01-01"
+                          },
+                          {
+                            "value": "%m.%d",
+                            "label": "01.01"
+                          }
+                        ],
+                        "filterable": true,
+                        "allowCustom": true,
+                        "showInPanel": {
+                          "conditions": [
+                            [
+                              "..type",
+                              "$ne",
+                              "category"
+                            ]
+                          ]
+                        }
+                      },
+                      "textarea": {
+                        "type": "font",
+                        "name": "文本",
+                        "default": {
+                          "fontFamily": "Microsoft Yahei",
+                          "fontWeight": "normal",
+                          "fontSize": 12,
+                          "color": "rgb(144, 160, 174)"
+                        }
+                      },
+                      "display": {
+                        "type": "suite",
+                        "name": "轴标签展示",
+                        "children": {
+                          "angle": {
+                            "name": "角度",
+                            "type": "iconRadio",
+                            "default": "0",
+                            "options": [
+                              {
+                                "value": "0",
+                                "label": "水平",
+                                "src": "horizontal"
+                              },
+                              {
+                                "value": "45",
+                                "label": "斜角",
+                                "src": "incline"
+                              },
+                              {
+                                "value": "90",
+                                "label": "垂直",
+                                "src": "vertical"
+                              }
+                            ],
+                            "col": 12
+                          },
+                          "amount": {
+                            "name": "标签数量",
+                            "type": "stepper",
+                            "default": 0,
+                            "step": 1
+                          },
+                          "unit": {
+                            "type": "text",
+                            "default": "",
+                            "name": "轴单位",
+                            "col": 12
+                          }
+                        }
+                      }
+                    },
+                    "showInPanel": {
+                      "conditions": [
+                        [
+                          ".isShow",
+                          "$eq",
+                          true
+                        ]
+                      ]
+                    }
+                  },
+                  "axisLine": {
+                    "name": "轴线",
+                    "type": "group",
+                    "children": {
+                      "show": {
+                        "default": true
+                      },
+                      "color": {
+                        "type": "fill",
+                        "name": "颜色",
+                        "default": "rgba(255, 255, 255, 0.1)"
+                      },
+                      "width": {
+                        "type": "stepper",
+                        "name": "宽度",
+                        "step": 1,
+                        "min": 0,
+                        "max": 15,
+                        "default": 2
+                      }
+                    },
+                    "enableHide": true,
+                    "showInPanel": {
+                      "conditions": [
+                        [
+                          ".isShow",
+                          "$eq",
+                          true
+                        ]
+                      ]
+                    }
+                  },
+                  "grid": {
+                    "name": "网格线",
+                    "type": "group",
+                    "children": {
+                      "show": {
+                        "default": false
+                      },
+                      "color": {
+                        "type": "fill",
+                        "name": "颜色",
+                        "default": "#fff"
+                      }
+                    },
+                    "enableHide": true,
+                    "showInPanel": {
+                      "conditions": [
+                        [
+                          ".isShow",
+                          "$eq",
+                          true
+                        ]
+                      ]
+                    }
+                  }
+                },
+                "enableHide": true
+              },
+              "yaxis2": {
+                "name": "y2轴",
+                "children": {
+                  "isShow": {
+                    "type": "switch",
+                    "name": "y2轴可见",
+                    "default": false
+                  },
+                  "yname": {
+                    "name": "y2轴名称",
+                    "type": "group",
+                    "children": {
+                      "name": {
+                        "type": "text",
+                        "name": "名称",
+                        "default": "y2轴"
+                      },
+                      "nameLocation": {
+                        "type": "select",
+                        "name": "名称位置",
+                        "default": "end",
+                        "options": [
+                          {
+                            "value": "start",
+                            "label": "起始"
+                          },
+                          {
+                            "value": "center",
+                            "label": "中间"
+                          },
+                          {
+                            "value": "end",
+                            "label": "末尾"
+                          }
+                        ]
+                      },
+                      "padding": {
+                        "type": "margin",
+                        "name": "名称内边距",
+                        "default": {
+                          "top": 2,
+                          "bottom": 3,
+                          "left": 3,
+                          "right": 1
+                        }
+                      },
+                      "nameGap": {
+                        "name": "标题距离",
+                        "type": "stepper",
+                        "step": 1,
+                        "min": 0,
+                        "max": 30,
+                        "default": 15
+                      },
+                      "textStyle": {
+                        "type": "font",
+                        "name": "文本格式",
+                        "default": {
+                          "fontFamily": "Microsoft Yahei",
+                          "fontWeight": "normal",
+                          "fontSize": 12,
+                          "color": "rgb(144, 160, 174)"
+                        }
+                      }
+                    }
+                  },
+                  "label": {
+                    "name": "轴标签",
+                    "type": "group",
+                    "enableHide": true,
+                    "children": {
+                      "show": {
+                        "default": true
+                      },
+                      "format": {
+                        "name": "显示格式",
+                        "type": "select",
+                        "default": "%m月",
+                        "description": "时间请参照 %m/%d/%Y %H:%M:%S, 整数参照 d, 浮点参照 .1f",
+                        "options": [
+                          {
+                            "value": "d",
+                            "label": "11(整数)"
+                          },
+                          {
+                            "value": ".1f",
+                            "label": "11.1(浮点数)"
+                          },
+                          {
+                            "value": ".2f",
+                            "label": "11.11(浮点数)"
+                          },
+                          {
+                            "value": "%Y年",
+                            "label": "2016年"
+                          },
+                          {
+                            "value": "%Y",
+                            "label": "2016(年份)"
+                          },
+                          {
+                            "value": "%m月%d日",
+                            "label": "01月01日"
+                          },
+                          {
+                            "value": "%m/%d",
+                            "label": "01/01(月/日)"
+                          },
+                          {
+                            "value": "%H:%M:%S",
+                            "label": "02:30:00"
+                          },
+                          {
+                            "value": "%H:%M",
+                            "label": "02:30(时:分)"
+                          },
+                          {
+                            "value": "%Y/%m/%d %H:%M",
+                            "label": "2016/01/01 02:30"
+                          },
+                          {
+                            "value": "%Y/%m/%d",
+                            "label": "2016/01/01"
+                          },
+                          {
+                            "value": "%m/%d %H:%M",
+                            "label": "01/01 02:30"
+                          },
+                          {
+                            "value": "%m月",
+                            "label": "1月"
+                          },
+                          {
+                            "value": "%d日",
+                            "label": "2日"
+                          },
+                          {
+                            "value": "%Hh",
+                            "label": "02h"
+                          },
+                          {
+                            "value": "%H",
+                            "label": "02(时)"
+                          },
+                          {
+                            "value": "%m-%d",
+                            "label": "01-01"
+                          },
+                          {
+                            "value": "%m.%d",
+                            "label": "01.01"
+                          }
+                        ],
+                        "filterable": true,
+                        "allowCustom": true,
+                        "showInPanel": {
+                          "conditions": [
+                            [
+                              "..type",
+                              "$ne",
+                              "category"
+                            ]
+                          ]
+                        }
+                      },
+                      "textarea": {
+                        "type": "font",
+                        "name": "文本",
+                        "default": {
+                          "fontFamily": "Microsoft Yahei",
+                          "fontWeight": "normal",
+                          "fontSize": 12,
+                          "color": "rgb(144, 160, 174)"
+                        }
+                      },
+                      "percentShow": {
+                        "type": "boolean",
+                        "name": "百分比",
+                        "default": "true"
+                      },
+                      "amount": {
+                        "name": "标签数量",
+                        "type": "stepper",
+                        "default": 0,
+                        "step": 1
+                      }
+                    },
+                    "showInPanel": {
+                      "conditions": [
+                        [
+                          ".isShow",
+                          "$eq",
+                          true
+                        ]
+                      ]
+                    }
+                  },
+                  "axisLine": {
+                    "name": "轴线",
+                    "type": "group",
+                    "children": {
+                      "show": {
+                        "default": true
+                      },
+                      "color": {
+                        "type": "fill",
+                        "name": "颜色",
+                        "default": "rgba(255, 255, 255, 0.1)"
+                      },
+                      "width": {
+                        "type": "stepper",
+                        "name": "宽度",
+                        "step": 1,
+                        "min": 0,
+                        "max": 15,
+                        "default": 2
+                      }
+                    },
+                    "enableHide": true,
+                    "showInPanel": {
+                      "conditions": [
+                        [
+                          ".isShow",
+                          "$eq",
+                          true
+                        ]
+                      ]
+                    }
+                  },
+                  "grid": {
+                    "name": "网格线",
+                    "type": "group",
+                    "children": {
+                      "show": {
+                        "default": false
+                      },
+                      "color": {
+                        "type": "fill",
+                        "name": "颜色",
+                        "default": "#fff"
+                      }
+                    },
+                    "enableHide": true,
+                    "showInPanel": {
+                      "conditions": [
+                        [
+                          ".isShow",
+                          "$eq",
+                          true
+                        ]
+                      ]
+                    }
+                  }
+                },
+                "enableHide": true
+              }
+            }
+          },
+          "series": {
+            "type": "menuChild",
+            "name": "数据系列",
+            "mode": "multiple",
+            "children": {
+              "bar": {
+                "type": "group",
+                "name": "柱图",
+                "children": {
+                  "barName": {
+                    "type": "text",
+                    "name": "数据名称",
+                    "default": "交易对手数量"
+                  },
+                  "barColor": {
+                    "type": "fill",
+                    "name": "柱体颜色",
+                    "default": "#40a9ff"
+                  },
+                  "barPercent": {
+                    "name": "柱体宽度",
+                    "type": "percent",
+                    "default": 30
+                  },
+                  "barText": {
+                    "type": "group",
+                    "name": "柱图数值",
+                    "children": {
+                      "show": {
+                        "name": "显示/隐藏",
+                        "type": "boolean",
+                        "default": false
+                      },
+                      "thousandth": {
+                        "type": "boolean",
+                        "name": "开启千分位",
+                        "default": true
+                      },
+                      "textStyle": {
+                        "type": "font",
+                        "name": "文本样式",
+                        "default": {
+                          "fontFamily": "Microsoft Yahei",
+                          "fontWeight": "normal",
+                          "fontSize": 15,
+                          "color": "#fff"
+                        }
+                      },
+                      "position": {
+                        "name": "文字位置",
+                        "type": "select",
+                        "default": "top",
+                        "options": [
+                          {
+                            "value": "top",
+                            "label": "顶部"
+                          },
+                          {
+                            "value": "bottom",
+                            "label": "底部"
+                          },
+                          {
+                            "value": "insideTop",
+                            "label": "内部"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "line": {
+                "type": "group",
+                "name": "折线图",
+                "children": {
+                  "lineName": {
+                    "type": "text",
+                    "name": "数据名称",
+                    "default": "规模占比(%)"
+                  },
+                  "lineColor": {
+                    "type": "fill",
+                    "name": "折线颜色",
+                    "default": "#3C8D40"
+                  },
+                  "lineWidth": {
+                    "type": "stepper",
+                    "name": "折线宽度",
+                    "step": 1,
+                    "min": 0,
+                    "max": 15,
+                    "default": 2
+                  },
+                  "lineSmooth": {
+                    "type": "stepper",
+                    "name": "折线平滑度",
+                    "step": 0.1,
+                    "min": 0,
+                    "max": 1,
+                    "default": 0
+                  },
+                  "connectNulls": {
+                    "type": "boolean",
+                    "name": "空数据连接",
+                    "default": true
+                  },
+                  "lineSymbol": {
+                    "type": "group",
+                    "name": "拐点图形",
+                    "children": {
+                      "symbol": {
+                        "type": "select",
+                        "name": "样式",
+                        "default": "roundRect",
+                        "options": [
+                          {
+                            "value": "circle",
+                            "label": "圆"
+                          },
+                          {
+                            "value": "rect",
+                            "label": "矩形"
+                          },
+                          {
+                            "value": "roundRect",
+                            "label": "圆角矩形"
+                          },
+                          {
+                            "value": "triangle",
+                            "label": "三角形"
+                          },
+                          {
+                            "value": "diamond",
+                            "label": "钻石"
+                          },
+                          {
+                            "value": "pin",
+                            "label": "顶针"
+                          },
+                          {
+                            "value": "arrow",
+                            "label": "箭头"
+                          },
+                          {
+                            "value": "none",
+                            "label": "空"
+                          }
+                        ]
+                      },
+                      "symbolSize": {
+                        "type": "number",
+                        "name": "字号",
+                        "default": 7,
+                        "min": 1,
+                        "max": 30
+                      }
+                    }
+                  },
+                  "lineText": {
+                    "type": "group",
+                    "name": "折线数值",
+                    "children": {
+                      "show": {
+                        "name": "显示/隐藏",
+                        "type": "boolean",
+                        "default": true
+                      },
+                      "textStyle": {
+                        "type": "font",
+                        "name": "文本样式",
+                        "default": {
+                          "fontFamily": "Microsoft Yahei",
+                          "fontWeight": "normal",
+                          "fontSize": 15,
+                          "color": "#fff"
+                        }
+                      },
+                      "afterPoint": {
+                        "type": "stepper",
+                        "name": "保留位数",
+                        "step": 1,
+                        "min": 0,
+                        "max": 15,
+                        "default": 2
+                      },
+                      "position": {
+                        "name": "文字位置",
+                        "type": "select",
+                        "default": "top",
+                        "options": [
+                          {
+                            "value": "top",
+                            "label": "顶部"
+                          },
+                          {
+                            "value": "bottom",
+                            "label": "底部"
+                          },
+                          {
+                            "value": "insideTop",
+                            "label": "内部"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "api_data": {
+      "source": [
+        {
+          "x": "2月",
+          "y": "235.5",
+          "z": 30.2
+        },
+        {
+          "x": "3月",
+          "y": "156.3",
+          "z": 10.6
+        },
+        {
+          "x": "4月",
+          "y": "123.5",
+          "z": 80.25
+        },
+        {
+          "x": "5月",
+          "y": "423.5",
+          "z": 42.99
+        },
+        {
+          "x": "6月",
+          "y": "456.5",
+          "z": 57.008
+        },
+        {
+          "x": "7月",
+          "y": "356.5",
+          "z": 31.9
+        }
+      ]
+    }
+  }
+}

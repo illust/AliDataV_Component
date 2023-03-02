@@ -2352,7 +2352,7 @@ module.exports = Event.extend(function Base(container, config) {
       console.log("data2",data2)
       if(data1<data2){
         useArrow = upd,
-        console.log("wwwwwwwwwwwww")
+        // console.log("wwwwwwwwwwwww")
         // console.log("data11",data1)
         // console.log("data22",data2)
         seriesDataObj1["symbolPosition"] = "end",
@@ -2361,7 +2361,7 @@ module.exports = Event.extend(function Base(container, config) {
         seriesDataObj1["symbolOffset"] =  [cfg.options.chart.arrowStyle.arrowPosition.x, cfg.options.chart.arrowStyle.arrowPosition.y]
       }else if(data1>data2){
         useArrow = downd,
-        console.log("hhhhhhhhhhhhhhhh")
+        // console.log("hhhhhhhhhhhhhhhh")
         // console.log("data11",data1)
         // console.log("data22",data2)
         seriesDataObj2["symbolPosition"] = "end",
@@ -2370,7 +2370,7 @@ module.exports = Event.extend(function Base(container, config) {
         seriesDataObj2["symbolOffset"] =  [cfg.options.chart.arrowStyle.arrowPosition.x, cfg.options.chart.arrowStyle.arrowPosition.y]
       }else{
         useArrow = equals,
-        console.log("kkkkkkkkkkkkkkkkkkk")
+        // console.log("kkkkkkkkkkkkkkkkkkk")
         // console.log("data11",data1)
         // console.log("data22",data2)
         seriesDataObj2["symbolPosition"] = "end",
@@ -2383,7 +2383,7 @@ module.exports = Event.extend(function Base(container, config) {
     if(arrowPosition == 'middle'){
       if(data1<data2){
         useArrow = upd,
-        console.log("rrrrrrrrrrrr")
+        // console.log("rrrrrrrrrrrr")
 
         seriesDataObj2["symbolPosition"] = "center",
         seriesDataObj2["label"]["normal"]["position"] = [cfg.options.chart.arrowStyle.arrowTextPosition.x, cfg.options.chart.arrowStyle.arrowTextPosition.y],
