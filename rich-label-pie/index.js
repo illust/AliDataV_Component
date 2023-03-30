@@ -45,14 +45,8 @@ module.exports = Event.extend(function Base(container, config) {
     //this.chart.render(data, cfg);
     // this.container.html(data[0].value)
     //如果有需要的话,更新样式
-    console.log("cfg.options.series.seriesTab",cfg.options.series.seriesTab);
-    // console.log("cfg.options.series.seriesTab.color.value",cfg.options.series.seriesTab.color.value);
-    console.log("cfg.options.series.seriesTab.map(e=>e.color.value)",cfg.options.series.seriesTab.map(e=>e.color.value));
     
     // var seriesColor = cfg.options.series.seriesTab.map()
-
-    
-
     option = {
       tooltip: {
         trigger: 'item',

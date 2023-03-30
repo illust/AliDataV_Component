@@ -1,0 +1,81 @@
+{
+  "name": "@sven.wong/precision-pie",
+  "version": "0.0.2",
+  "dependencies": {
+    "bcore": "0.0.18",
+    "jquery": "2.1.4",
+    "lodash": "4.6.1",
+    "echarts": "5.0.0"
+  },
+  "datav": {
+    "cn_name": "精确饼图",
+    "icon": "",
+    "protocol": 2,
+    "type": [
+      "regular"
+    ],
+    "view": {
+      "width": "1100",
+      "height": "520",
+      "minWidth": "200",
+      "minHeight": "100"
+    },
+    "apis": {
+      "source": {
+        "handler": "render",
+        "description": "接口描述",
+        "fields": {
+          "value": {
+            "description": "值说明"
+          }
+        }
+      }
+    },
+    "config": {
+      "precision": {
+        "name": "精确位数",
+        "type": "number",
+        "range": [
+          0,
+          10
+        ],
+        "step": 1,
+        "default": 2
+      },
+      "distanceRight": {
+        "name": "图例距右",
+        "type": "number",
+        "range": [
+          0,
+          100
+        ],
+        "default": 12
+      },
+      "distanceTop": {
+        "name": "图例距顶",
+        "type": "number",
+        "range": [
+          0,
+          100
+        ],
+        "default": 55
+      }
+    },
+    "api_data": {
+      "source": [
+        {
+          "name": "预警类客户",
+          "value": 0.3
+        },
+        {
+          "name": "关注类客户",
+          "value": 1.64
+        },
+        {
+          "name": "一般类客户",
+          "value": 98.06
+        }
+      ]
+    }
+  }
+}
